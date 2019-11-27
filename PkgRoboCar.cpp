@@ -1,13 +1,11 @@
-#ifndef _PKG_ROBOCAR_H
 #include "PkgRoboCar.h"
-#endif
 
-CManager* itsCManager = NULL;
-CCom* itsCCom = NULL;
+CManager* p_itsCManager = NULL;
+CCom* p_itsCCom = NULL;
 
 void init(){
-    itsCManager = new(CManager);
-    itsCCom = new(CCom);
+    p_itsCManager = new(CManager);
+    p_itsCCom = new(CCom);
 }
 
 void run(){

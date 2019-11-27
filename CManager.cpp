@@ -1,6 +1,4 @@
-#ifndef _C_MANAGER_H
 #include "CManager.h"
-#endif
 
 CManager::CManager(){
     p_itsIManager = (IManager*) new(AManager);

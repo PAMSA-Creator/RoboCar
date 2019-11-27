@@ -1,6 +1,4 @@
-#ifndef _C_COM_H
 #include "CCom.h"
-#endif
 
 CCom::CCom(){
     p_itsICom = (ICom *) new(HC05);
