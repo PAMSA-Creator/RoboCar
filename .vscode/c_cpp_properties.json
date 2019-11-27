@@ -13,30 +13,29 @@
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64",
             "forcedInclude": [
-                "/home/vvillatte/Applications/ArduinoIDE/arduino-1.8.10/hardware/arduino/avr/cores/arduino/Arduino.h"
+                "${HOME}/Applications/ArduinoIDE/arduino-1.8.10/hardware/arduino/avr/cores/arduino/Arduino.h"
             ]
         },
         {
             "name": "Arduino",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${HOME}/Applications/ArduinoIDE/arduino-1.8.10/hardware/tools/avr/avr/include/avr/**"
             ],
-            "defines": [],
+            "defines": [
+                "USBCON"
+            ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64"
-        },
-        {
-            "name": "Arduino",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64"
+            "intelliSenseMode": "gcc-x64",
+            "compilerArgs": [],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
         }
     ],
     "version": 4
