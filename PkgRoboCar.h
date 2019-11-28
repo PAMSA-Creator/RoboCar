@@ -6,7 +6,23 @@
 #include "CManager.h"
 #include "CCom.h"
 
-void init();
-void run();
+class RoboCar{
+    private:
+    CManager* p_itsCManager = NULL;
+    CCom* p_itsCCom = NULL;
+
+    public:
+    // Default constructor
+    RoboCar();
+
+    // Default destructor
+    ~RoboCar();
+
+    // Initialisation function
+    void init();
+
+    // Run function
+    void run();
+};
 
 #endif

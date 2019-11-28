@@ -3,30 +3,52 @@
 
 #include <Arduino.h>
 
+class IManager;
+class AManager;
+class CManager;
+
+#include "CCom.h"
+
 class IManager{
+    protected:
+    CManager* p_itsCManager = NULL;
+
     public:
+    // Getter function
     virtual IManager* get_ItsIManager();
-    virtual void set_ItsIManager(IManager* arg);
+
+    // CManager setter function
+    virtual void set_ItsCManager(CManager* arg);
 };
 
 class AManager: public IManager{
-    private:
-    IManager* p_itsIManager = NULL;
-
+    public:
+    // Getter function
     IManager* get_ItsIManager();
-    void set_ItsIManager(IManager* arg);
+
+    // CManager Setter function
+    void set_ItsCManager(CManager* arg);
 };
 
 class CManager{
     private:
     IManager* p_itsIManager = NULL;
+    ICom* p_itsICom = NULL;
 
     public:
+    // Default constructor
     CManager();
+    // Default destructor
     ~CManager();
 
+    // Getter function
     IManager* get_ItsIManager();
-    void set_ItsIManager(IManager* arg);
+
+    // CCom setter function
+    void set_ItsICom(ICom* arg);
+
+    // Initialisation function
+    void init();
 };
 
 #endif

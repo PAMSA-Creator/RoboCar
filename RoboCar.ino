@@ -1,11 +1,13 @@
 #include "PkgRoboCar.h"
 
+RoboCar myRoboCar;
+
 void setup()
 {
-	init();
+	myRoboCar.init();
 }
 
 void loop()
 {
-    run();
+    myRoboCar.run();
 }

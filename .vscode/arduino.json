@@ -1,4 +1,6 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "RoboCar.ino"
+    "sketch": "RoboCar.ino",
+    "programmer": "AVR ISP",
+    "port": "/dev/ttyACM0"
 }
