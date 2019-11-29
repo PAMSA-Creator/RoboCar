@@ -14,7 +14,7 @@
                 "${workspaceFolder}/**",
                 "${env:arduino.avr.include.path}/cores/arduino",
                 "${env:arduino.avr.include.path}/variants/standard",
-                "${env:arduino.tools.include.path}/avr/include/avr",
+                "${env:arduino.tools.include.path}/avr/include/avr"
             ],
             "defines": [
                 "USBCON"
