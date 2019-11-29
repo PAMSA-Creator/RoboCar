@@ -3,12 +3,12 @@
 
 #include <Arduino.h>
 
-#include "CManager.h"
+#include "CMan.h"
 #include "CCom.h"
 
 class RoboCar{
     private:
-    CManager* p_itsCManager = NULL;
+    CMan* p_itsCMan = NULL;
     CCom* p_itsCCom = NULL;
 
     public:

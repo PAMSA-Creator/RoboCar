@@ -12,6 +12,7 @@
             "name": "Arduino",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/src",
                 "${env:arduino.avr.include.path}/cores/arduino",
                 "${env:arduino.avr.include.path}/variants/standard",
                 "${env:arduino.tools.include.path}/avr/include/avr"
@@ -26,7 +27,8 @@
             "compilerArgs": [],
             "browse": {
                 "path": [
-                    "${workspaceFolder}/**"
+                    "${workspaceFolder}/**",
+                    "${workspaceFolder}/src"
                 ],
                 "limitSymbolsToIncludedHeaders": true
             }
