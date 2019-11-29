@@ -1,13 +1,26 @@
+/* 
+    TYPE:       COMPONENT
+    NAME:       CCom
+    INTERFACE:  ICom
+    PORT:       p_itsICom
+
+    CCom is the communication subsystem for RoboCar.
+    It enables bi-directional communication between the Arduino and outside world.
+    CCom's main method of communication is built around a standard serial interface.
+    CCom uses the Arduino SoftwareSerial library.
+    CCom supports Bluetooth communication via an HC05 module.
+ */
+
 #ifndef _C_COM_H
 #define _C_COM_H
 
 #include <Arduino.h>
 
+class CCom;
 class ICom;
 class HC05;
-class CCom;
 
-#include "CManager.h"
+#include "CMan.h"
 
 /* Class ICom (Interface) */
 class ICom{
@@ -39,8 +52,8 @@ class HC05 : public ICom{
 /* Class CCom (Component) */
 class CCom{
     private:
-    ICom* p_itsICom = NULL;             // ICom port
-    IManager* p_itsIManager = NULL;     // IManager port
+    ICom* p_itsICom = NULL;             // CCom port
+    IMan* p_itsIMan = NULL;             // CMan port
 
     // Interface (ICom) setter
     void set_ItsICom(ICom* arg);
@@ -54,9 +67,9 @@ class CCom{
     // Interface (ICom) getter
     ICom* get_ItsICom();
 
-    // IManager getter and setter
-    IManager* get_ItsIManager();
-    void set_ItsIManager(IManager* arg);
+    // IMan getter and setter
+    IMan* get_ItsIMan();
+    void set_ItsIMan(IMan* arg);
 
     // Initialisation
     void init();
