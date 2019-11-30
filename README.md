@@ -1,4 +1,13 @@
-## Welcome to GitHub Pages
+## Welcome to GitHub RoboCar project pages
+
+This is a robotics project run by members of the Parramatta MakerSpace Association (PAMSA).
+The aim of this project is to build a small mobile robot for kids.
+The robot can be remotely controlled or programmed to accomplish a number of tasks.
+We are building this from scratch, learning as we go.
+All project data files can be found on our Google Drive. This repo only contains the code that runs on our robot.
+
+---
+## Github Pages Instructions
 
 You can use the [editor on GitHub](https://github.com/PAMSA-Creator/RoboCar/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
