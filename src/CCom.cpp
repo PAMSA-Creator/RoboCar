@@ -21,12 +21,12 @@ CCom::~CCom(){
     if(NULL != p_itsICom) delete(p_itsICom);
 }
 
-IManager* CCom::get_ItsIManager(){
-    return p_itsIManager;
+IMan* CCom::get_ItsIMan(){
+    return p_itsIMan;
 }
 
-void CCom::set_ItsIManager(IManager* arg){
-    p_itsIManager = (NULL != arg) ? arg : NULL;
+void CCom::set_ItsIMan(IMan* arg){
+    p_itsIMan = (NULL != arg) ? arg : NULL;
 }
 
 ICom* CCom::get_ItsICom(){
