@@ -5,15 +5,11 @@
 
 class RoboCar;
 
+#include "ErrorCodes.h"
 #include "CMan.h"
 #include "CCom.h"
 #include "CMot.h"
 #include "CSen.h"
-
-#define _EXCEPTION_NULL_POINTER_CMAN    0xFFFE
-#define _EXCEPTION_NULL_POINTER_CCOM    0xFFFD
-#define _EXCEPTION_NULL_POINTER_CMOT    0xFFFC
-#define _EXCEPTION_NULL_POINTER_CSEN    0xFFFB
 
 class RoboCar{
     private:

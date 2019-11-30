@@ -15,10 +15,10 @@ RoboCar::~RoboCar(){
 }
 
 int RoboCar::init(){
-    if(NULL == p_itsCCom) return _EXCEPTION_NULL_POINTER_CCOM;
-    if(NULL == p_itsCMot) return _EXCEPTION_NULL_POINTER_CMOT;
-    if(NULL == p_itsCSen) return _EXCEPTION_NULL_POINTER_CSEN;
-    if(NULL == p_itsCMan) return _EXCEPTION_NULL_POINTER_CMAN;
+    if(NULL == p_itsCCom) return _ERRNO_NULL_POINTER_CCOM;
+    if(NULL == p_itsCMot) return _ERRNO_NULL_POINTER_CMOT;
+    if(NULL == p_itsCSen) return _ERRNO_NULL_POINTER_CSEN;
+    if(NULL == p_itsCMan) return _ERRNO_NULL_POINTER_CMAN;
 
     p_itsCCom->set_ItsIMan(p_itsCMan->get_ItsIMan());
     p_itsCMot->set_ItsIMan(p_itsCMan->get_ItsIMan());
@@ -34,7 +34,7 @@ int RoboCar::init(){
     p_itsCMot->init();
     p_itsCSen->init();
 
-    if(NULL != p_itsCCom) p_itsCCom->println("RoboCar initialisation complete");
+    Serial.println("RoboCar initialisation complete");
 
     return 0;
 }
@@ -42,7 +42,7 @@ int RoboCar::init(){
 void RoboCar::run(){
     static bool bRun = false;
     if(!bRun){
-        if(NULL != p_itsCCom) p_itsCCom->println("RoboCar is now running");
+        Serial.println("RoboCar is now running");
         bRun = true;
     }
 }

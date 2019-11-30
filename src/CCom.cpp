@@ -1,20 +1,8 @@
 #include "CCom.h"
 
-ICom* HC05::get_ItsICom(){
-    return (ICom*) this;
-}
-
-void HC05::set_ItsCCom(CCom* arg){
-    p_itsCCom = (NULL != arg) ? arg : NULL;
-}
-
-void HC05::init(){
-    Serial.begin(115200);
-    Serial.println("Serial port initialised!");
-}
-
+/* CCom */
 CCom::CCom(){
-    p_itsICom = (ICom*) new HC05();
+    p_itsICom = (ICom*) new Bluetooth();
 }
 
 CCom::~CCom(){
@@ -38,13 +26,34 @@ void CCom::set_ItsICom(ICom *arg){
 }
 
 void CCom::init(){
-    //p_itsICom = (ICom*) new HC05();
     if(NULL != p_itsICom){
-        p_itsICom->init();
         p_itsICom->set_ItsCCom(this);
+        p_itsICom->init();
+        Serial.println("CCom initialised");
     }
+    else Serial.println("!!! Failed to initialise CCom !!!");
 }
 
-void CCom::println(const char* arg){
+/* Bluetooth */
+ICom* Bluetooth::get_ItsICom(){
+    return (ICom*) this;
+}
+
+void Bluetooth::set_ItsCCom(CCom* arg){
+    p_itsCCom = (NULL != arg) ? arg : NULL;
+}
+
+void Bluetooth::init_Bluetooth(){
+    Serial.println("Bluetooth initialised");
+}
+
+void Bluetooth::init(){
+    this->init_Bluetooth();
+    Serial.begin(115200);
+    Serial.println("Communication initialised");
+}
+
+void Bluetooth::println(const char* arg){
     Serial.println(arg);
 }
+
