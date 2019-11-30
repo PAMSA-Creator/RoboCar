@@ -6,6 +6,21 @@ The robot can be remotely controlled or programmed to accomplish a number of tas
 We are building this from scratch, learning as we go.
 All project data files can be found on our Google Drive. This repo only contains the code that runs on our robot.
 
+### Repo structure
+
+All source code is contained in the src folder.
+Configuration files for Visual Studio Code are found in the .vscode folder
+
+### Visual Studio Code configuration
+
+If used, Visual Studio Code should be pre-configured to generate and run code for Arduino.
+It means that the Arduino IDE should be installed and all necessary VSC extensions installed:
+- Arduino
+- C/C++
+- C++ Intellisense
+- GitHub
+If necessary, locally update the c_cpp_properties.json file to suit your environment.
+
 ---
 ## Github Pages Instructions
 
