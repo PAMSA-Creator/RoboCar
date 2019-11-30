@@ -31,6 +31,14 @@ void CMan::set_ItsICom(ICom* arg){
     p_itsICom = (NULL != arg) ? arg : NULL;
 }
 
+void CMan::set_ItsIMot(IMot* arg){
+    p_itsIMot = (NULL != arg) ? arg : NULL;
+}
+
+void CMan::set_ItsISen(ISen* arg){
+    p_itsISen = (NULL != arg) ? arg : NULL;
+}
+
 void CMan::init(){
     //p_itsIMan = (IMan*) new Brain();
     if(NULL != p_itsIMan) p_itsIMan->set_ItsCMan(this);

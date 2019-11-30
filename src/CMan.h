@@ -20,6 +20,8 @@ class IMan;
 class Brain;
 
 #include "CCom.h"
+#include "CMot.h"
+#include "CSen.h"
 
 class IMan{
     protected:
@@ -46,6 +48,8 @@ class CMan{
     private:
     IMan* p_itsIMan = NULL;
     ICom* p_itsICom = NULL;
+    IMot* p_itsIMot = NULL;
+    ISen* p_itsISen = NULL;
 
     public:
     // Default constructor
@@ -56,8 +60,10 @@ class CMan{
     // Getter function
     IMan* get_ItsIMan();
 
-    // CCom setter function
+    // Setter functions
     void set_ItsICom(ICom* arg);
+    void set_ItsIMot(IMot* arg);
+    void set_ItsISen(ISen* arg);
 
     // Initialisation function
     void init();

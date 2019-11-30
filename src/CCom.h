@@ -22,33 +22,6 @@ class HC05;
 
 #include "CMan.h"
 
-/* Class ICom (Interface) */
-class ICom{
-    protected:
-    CCom* p_itsCCom = NULL;
-
-    public:
-    virtual ICom* get_ItsICom();
-    virtual void set_ItsCCom(CCom* arg);
-    virtual void init();
-};
-
-/* Class HC05 (Adapter) */
-class HC05 : public ICom{
-    private:
-    void init_HC05();
-
-    public:
-    // Getter function
-    ICom* get_ItsICom();
-
-    // CCom setter function
-    void set_ItsCCom(CCom* arg);
-
-    // Initialisation function
-    void init();
-};
-
 /* Class CCom (Component) */
 class CCom{
     private:
@@ -76,6 +49,33 @@ class CCom{
 
     // Println
     void println(const char* arg);
+};
+
+/* Class ICom (Interface) */
+class ICom{
+    protected:
+    CCom* p_itsCCom = NULL;
+
+    public:
+    virtual ICom* get_ItsICom();
+    virtual void set_ItsCCom(CCom* arg);
+    virtual void init();
+};
+
+/* Class HC05 (Adapter) */
+class HC05 : public ICom{
+    private:
+    void init_HC05();
+
+    public:
+    // Getter function
+    ICom* get_ItsICom();
+
+    // CCom setter function
+    void set_ItsCCom(CCom* arg);
+
+    // Initialisation function
+    void init();
 };
 
 #endif

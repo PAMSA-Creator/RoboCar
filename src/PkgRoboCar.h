@@ -3,13 +3,24 @@
 
 #include <Arduino.h>
 
+class RoboCar;
+
 #include "CMan.h"
 #include "CCom.h"
+#include "CMot.h"
+#include "CSen.h"
+
+#define _EXCEPTION_NULL_POINTER_CMAN    0xFFFE
+#define _EXCEPTION_NULL_POINTER_CCOM    0xFFFD
+#define _EXCEPTION_NULL_POINTER_CMOT    0xFFFC
+#define _EXCEPTION_NULL_POINTER_CSEN    0xFFFB
 
 class RoboCar{
     private:
     CMan* p_itsCMan = NULL;
     CCom* p_itsCCom = NULL;
+    CMot* p_itsCMot = NULL;
+    CSen* p_itsCSen = NULL;
 
     public:
     // Default constructor
@@ -19,7 +30,7 @@ class RoboCar{
     ~RoboCar();
 
     // Initialisation function
-    void init();
+    int init();
 
     // Run function
     void run();
