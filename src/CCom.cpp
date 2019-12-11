@@ -27,7 +27,6 @@ void CCom::set_ItsICom(ICom *arg){
 
 void CCom::init(){
     if(NULL != p_itsICom){
-        p_itsICom->set_ItsCCom(this);
         p_itsICom->init();
         Serial.println("CCom initialised");
     }
@@ -37,10 +36,6 @@ void CCom::init(){
 /* Bluetooth */
 ICom* Bluetooth::get_ItsICom(){
     return (ICom*) this;
-}
-
-void Bluetooth::set_ItsCCom(CCom* arg){
-    p_itsCCom = (NULL != arg) ? arg : NULL;
 }
 
 void Bluetooth::init_Bluetooth(){

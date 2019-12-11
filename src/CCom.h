@@ -50,12 +50,9 @@ class CCom{
 
 /* Class ICom */
 class ICom{
-    protected:
-    CCom* p_itsCCom = NULL;
 
     public:
     virtual ICom* get_ItsICom();
-    virtual void set_ItsCCom(CCom* arg);
     virtual void init();
     virtual void println(const char* arg);
 };
@@ -68,9 +65,6 @@ class Bluetooth : public ICom{
     public:
     // Getter
     ICom* get_ItsICom();
-
-    // CCom setter
-    void set_ItsCCom(CCom* arg);
 
     // Initialisation
     void init();

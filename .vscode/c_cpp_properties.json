@@ -28,8 +28,8 @@
             "name": "Arduino_Win",
             "browse": {
                 "path": [
-                    "${workspaceFolder}",
-                    "${workspaceFolder}\\src",
+                    "${workspaceFolder}\\**",
+                    "${workspaceFolder}\\src\\**",
                     "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
                     "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
                     "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard",
@@ -39,8 +39,8 @@
                 "limitSymbolsToIncludedHeaders": true
             },
             "includePath": [
-                "${workspaceFolder}",
-                "${workspaceFolder}\\src",
+                "${workspaceFolder}\\**",
+                "${workspaceFolder}\\src\\**",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard",
