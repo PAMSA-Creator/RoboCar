@@ -2,6 +2,7 @@
 
 /* CCom */
 CCom::CCom(){
+    // Return pointer to Bluetooth object cast as ICom type
     p_itsICom = (ICom*) new Bluetooth();
 }
 
