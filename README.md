@@ -18,7 +18,7 @@ It means that the Arduino IDE should be installed and all necessary VSC extensio
 - Arduino
 - C/C++
 - C++ Intellisense
-- GitHub
+VSC natively handles GitHub commands but requires a third party tool to do so. Git GUI will be required to allow VSC to provide Source Control functionality GitHub style.
 If necessary, locally update the c_cpp_properties.json file to suit your environment.
 
 ---
