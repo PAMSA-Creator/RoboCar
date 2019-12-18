@@ -8,7 +8,7 @@
     It enables bi-directional communication between the Arduino and outside world.
     CCom's main method of communication is built around a standard serial interface.
     CCom uses the Arduino SoftwareSerial library.
-    CCom supports Bluetooth communication via an HC05 module.
+    CCom supports Bluetooth communication via an HC05 or HM10 module.
  */
 
 #ifndef _C_COM_H
@@ -18,7 +18,7 @@
 
 class CCom;
 class ICom;
-class HC05;
+class Bluetooth;
 
 #include "CMan.h"
 
@@ -46,36 +46,31 @@ class CCom{
 
     // Initialisation
     void init();
-
-    // Println
-    void println(const char* arg);
 };
 
-/* Class ICom (Interface) */
+/* Class ICom */
 class ICom{
-    protected:
-    CCom* p_itsCCom = NULL;
 
     public:
     virtual ICom* get_ItsICom();
-    virtual void set_ItsCCom(CCom* arg);
     virtual void init();
+    virtual void println(const char* arg);
 };
 
-/* Class HC05 (Adapter) */
-class HC05 : public ICom{
+/* Class Bluetooth */
+class Bluetooth : public ICom{
     private:
-    void init_HC05();
+    void init_Bluetooth();
 
     public:
-    // Getter function
+    // Getter
     ICom* get_ItsICom();
 
-    // CCom setter function
-    void set_ItsCCom(CCom* arg);
-
-    // Initialisation function
+    // Initialisation
     void init();
+
+    // println
+    void println(const char* arg);
 };
 
 #endif
