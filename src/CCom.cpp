@@ -36,6 +36,7 @@ void CCom::init(){
 
 /* Bluetooth */
 ICom* Bluetooth::get_ItsICom(){
+    // Return pointer to itself
     return (ICom*) this;
 }
 
