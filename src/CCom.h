@@ -18,6 +18,7 @@
 
 class CCom;
 class ICom;
+class ACom;
 class Bluetooth;
 
 #include "CMan.h"
@@ -25,57 +26,73 @@ class Bluetooth;
 /* Class CCom (Component) */
 class CCom{
     private:
-    ICom* p_itsICom = NULL;             // CCom port
+    ACom* p_itsACom = NULL;             // CCom adapter (ACom)
     IMan* p_itsIMan = NULL;             // CMan port
-
-    // Interface (ICom) setter
-    void set_ItsICom(ICom* arg);
+    Bluetooth* p_itsBluetooth = NULL;   // Bluetooth object
 
     public:
-    // Default constructor
+    // Default constructor & destructor
     CCom();
-    // Default destructor
     ~CCom();
 
-    // Interface (ICom) getter
+    // Getters & setters
     ICom* get_ItsICom();
-
-    // IMan getter and setter
-    IMan* get_ItsIMan();
     void set_ItsIMan(IMan* arg);
 
     // Initialisation
     void init();
+
+    // Behaviour
 };
 
 /* Class ICom */
 class ICom{
-    protected:
-    CCom* p_itsCCom = NULL;
 
     public:
     virtual ICom* get_ItsICom();
-    virtual void set_ItsCCom(CCom* arg);
     virtual void init();
     virtual void println(const char* arg);
 };
 
-/* Class Bluetooth */
-class Bluetooth : public ICom{
+/* Adapter calss */
+class ACom : public ICom{
     private:
-    void init_Bluetooth();
+    /* Pointer to Bluetooth device */
+    Bluetooth* p_itsBluetooth = NULL;
+
+    // Initialisation
+    void init_ACom();
 
     public:
-    // Getter
-    ICom* get_ItsICom();
+    // Default constructor & destructor
+    ACom();
+    ~ACom();
 
-    // CCom setter
-    void set_ItsCCom(CCom* arg);
+    // Setters & getters
+    ICom* get_ItsICom();
+    void set_ItsBluetooth(Bluetooth* arg);
 
     // Initialisation
     void init();
 
-    // println
+    // Behaviour
+    void println(const char* arg);
+};
+
+/* Class Bluetooth */
+class Bluetooth{
+    private:
+    void init_Bluetooth();
+
+    public:
+    // Default constructor & destructor
+    Bluetooth();
+    ~Bluetooth();
+
+    // Initialisation
+    void init();
+
+    // Behaviour
     void println(const char* arg);
 };
 
