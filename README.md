@@ -61,6 +61,6 @@ Its primary role is to provide sensory information to CMan to assist the decisio
 
 ## Test Architecture
 To test individual components a series of alternate builds will be created.
-Each build will enable each RoboCar components to be interfaces with a test component, e.g. "TstCMan" is the test component for the CMan component.
+Each build will interface one or more RoboCar component(s) with a test component, e.g. "TstCMan" is the test component for the CMan component.
 The purpose of each test component is solely to exercise and prove the correct behaviour of each component before their integration into the PkgRoboCar build.
 This methodology allows for early debugging without the need for specific hardware. The hardware, however, has to be emulated as thoroughly as possible.
