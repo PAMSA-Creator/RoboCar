@@ -23,40 +23,38 @@ VSC natively handles GitHub commands but requires a third party tool to do so. G
 If necessary, locally update the c_cpp_properties.json file to suit your environment.
 
 ---
-## Github Pages Instructions
+## Software Architecture
 
-You can use the [editor on GitHub](https://github.com/PAMSA-Creator/RoboCar/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This project uses the Adapter model to teach the students the importance of properly defining component interfaces.
+We've also used practices borrowed from UML to define the architecture:
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Packages
+Packages encapsulte software elements that define a specific build of the system.
+A package is a class that sole purpose is to instantiate and initialise the softwrae for a particular system or set of behaviours.
+It creates all necessary components and their respective relationships.
 
-### Markdown
+### Components
+Components represent physical or logical parts of a system as a single modular software element.
+Each component can be developed by one individual or a small team of designers.
+Each component is defined by its interface(s) and expected behaviour(s).
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## PkgRoboCar
+PkgRoboCar is the main build package for the project.
+It is intended to only build RoboCar for a single platform (Arduino) at this stage.
 
-```markdown
-Syntax highlighted code block
+## RoboCar components
+### CMan
+CMan is the nervous system of RoboCar.
+Its primary role is to relay information between the other components, processing it as required to satisfy the expect behaviour.
 
-# Header 1
-## Header 2
-### Header 3
+### CCom
+CCom is the external communication system of RoboCar.
+Its primary role is to receive and send information from and to the remote controller.
 
-- Bulleted
-- List
+### CMot
+CCmot is the motion controller.
+Its primary role is to control and enable all RoboCar movements.
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/PAMSA-Creator/RoboCar/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### CSen
+CSen is the sensory interface of RoboCar.
+Its primary role is to provide sensory information to CMan to assist the decision making process.
