@@ -58,3 +58,9 @@ Its primary role is to control and enable all RoboCar movements.
 ### CSen
 CSen is the sensory interface of RoboCar.
 Its primary role is to provide sensory information to CMan to assist the decision making process.
+
+## Test Architecture
+To test individual components a series of alternate builds will be created.
+Each build will enable each RoboCar components to be interfaces with a test component, e.g. "TstCMan" is the test component for the CMan component.
+The purpose of each test component is solely to exercise and prove the correct behaviour of each component before their integration into the PkgRoboCar build.
+This methodology allows for early debugging without the need for specific hardware. The hardware, however, has to be emulated as thoroughly as possible.
