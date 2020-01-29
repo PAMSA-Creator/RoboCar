@@ -43,6 +43,7 @@ Initilisation
 Check and set all relationships (pointers)
 */
 void CCom::init(){
+    Serial.println("CCom::init()");
     if(NULL != p_itsBluetooth){
         p_itsBluetooth->init();                         // Initialise Bluetooth
     } // !!! Need to catch exception !!!
@@ -71,14 +72,6 @@ ACom::~ACom(){
 }
 
 /*
-Getter: get_ItsICom
-Return the ICom pointer associated with this Acom object
-*/
-ICom* ACom::get_ItsICom(){
-    return (ICom*) this;
-}
-
-/*
 Setter: set_ItsBluetooth
 Pass a valid Bluetooth pointer to local variable p_itsBluetooth or nullify
 */
@@ -91,6 +84,10 @@ void ACom::set_ItsBluetooth(Bluetooth* arg){
 Initilisation
 Initialise ACom
 */
+void ACom::init_ACom(){
+    Serial.println("ACom::init_ACom()");
+}
+
 void ACom::init(){
     this->init_ACom();
 }
@@ -123,8 +120,8 @@ Bluetooth::~Bluetooth(){
 TBD
 */
 void Bluetooth::init_Bluetooth(){
+    Serial.println("Bluetooth::init_Bluetooth()");
     Serial.begin(115200);
-    Serial.println("Bluetooth initialised");
 }
 
 /*

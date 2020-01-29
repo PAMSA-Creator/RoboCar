@@ -2,6 +2,7 @@
     TYPE:       COMPONENT
     NAME:       CCom
     INTERFACE:  ICom
+    ADAPTER:    ACom
     PORT:       p_itsICom
 
     CCom is the communication subsystem for RoboCar.
@@ -49,15 +50,14 @@ class CCom{
 class ICom{
 
     public:
-    virtual ICom* get_ItsICom();
     virtual void init();
     virtual void println(const char* arg);
 };
 
-/* Adapter calss */
+/* Adapter class */
 class ACom : public ICom{
     private:
-    /* Pointer to Bluetooth device */
+    /* Pointer to Bluetooth object */
     Bluetooth* p_itsBluetooth = NULL;
 
     // Initialisation
@@ -68,8 +68,7 @@ class ACom : public ICom{
     ACom();
     ~ACom();
 
-    // Setters & getters
-    ICom* get_ItsICom();
+    // Getters & setters
     void set_ItsBluetooth(Bluetooth* arg);
 
     // Initialisation
@@ -88,6 +87,8 @@ class Bluetooth{
     // Default constructor & destructor
     Bluetooth();
     ~Bluetooth();
+
+    // Getters & setters
 
     // Initialisation
     void init();

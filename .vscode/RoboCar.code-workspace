@@ -1,8 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "/home/vvillatte/Projects/PAMSA/Code/RoboCar/"
+			"path": "C:\\Users\\vvill\\OneDrive\\Documents\\Projects\\Code\\PAMSA\\RoboCar"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"C_Cpp.intelliSenseCacheSize": 0
+	}
 }

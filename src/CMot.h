@@ -2,10 +2,12 @@
     TYPE:       COMPONENT
     NAME:       CMot
     INTERFACE:  IMot
+    ADAPTER:    AMot
     PORT:       p_itsIMot
 
     CMot is the motion controller subsystem for RoboCar.
     It controls all actuators such as motors and arms.
+    The main actuators consists of a series of DC motors for and servo motors
  */
 
 #ifndef _C_MOT_H
@@ -15,31 +17,28 @@
 
 class CMot;
 class IMot;
+class AMot;
 class Controller;
 class DCMotor;
-class Stepper;
+class Servo;
 
 #include "CMan.h"
 
 class CMot{
     private:
-    IMot* p_itsIMot = NULL;             // CMot port
+    AMot* p_itsAMot = NULL;             // CMot Adapter (AMot)
     IMan* p_itsIMan = NULL;             // CMan port
-
-    // Interface (ICom) setter
-    void set_ItsIMot(IMot* arg);
+    Controller* p_itsController = NULL; // Controller  object
+    DCMotor* p_itsDCMotor = NULL;       // DCMotor object
+    Servo* p_itsServo = NULL;           // Servo object
 
     public:
-    // Default constructor
+    // Default Constructor & Destructor
     CMot();
-    // Default destructor
     ~CMot();
 
-    // Interface (ICom) getter
+    // Getters & Setters
     IMot* get_ItsIMot();
-
-    // IMan getter and setter
-    IMan* get_ItsIMan();
     void set_ItsIMan(IMan* arg);
 
     // Initialisation
@@ -47,64 +46,75 @@ class CMot{
 };
 
 class IMot{
-    protected:
-    CMot* p_itsCMot = NULL;
 
     public:
-    virtual IMot* get_ItsIMot();
-    virtual void set_ItsCMot(CMot* arg);
     virtual void init();
 };
 
-class Controller : public IMot{
+class AMot : public IMot{
+    private:
+    Controller* p_itsController = NULL;
+
+    // Initialisation
+    void init_AMot();
+
+    public:
+    // Default Constructor & Destructor
+    AMot();
+    ~AMot();
+
+    // Getters & Setters
+    void set_ItsController(Controller* arg);
+
+    // Initialisation
+    void init();
+};
+
+class Controller{
     private:
     DCMotor* p_itsDCMotor = NULL;
-    Stepper* p_itsStepper = NULL;
+    Servo* p_itsServo = NULL;
 
-    // internal initialisation function
+    // Initialisation
     void init_Controller();
 
     public:
-    // Default constructor and destructor
+    // Default Constructor & Destructor
     Controller();
     ~Controller();
 
-    // Getter function
-    IMot* get_ItsIMot();
+    // Getters & Setters
+    void set_ItsDCMotor(DCMotor* arg);
+    void set_ItsServo(Servo* arg);
 
-    // CMot setter function
-    void set_ItsCMot(CMot* arg);
-
-    // Initialisation function
+    // Initialisation
     void init();
 };
 
 class DCMotor{
     private:
     Controller* p_itsController = NULL;    
-    void init_Motor();
+
+    // Initialisation
+    void init_DCMotor();
 
     public:
-    // Getter function
-    DCMotor* get_ItsDCMotor();
-
-    // Controller setter function
+    // Getters & Setters
     void set_ItsController(Controller* arg);
 
-    // Initialisation function
+    // Initialisation
     void init();
 };
 
-class Stepper{
+class Servo{
     private:
-    Controller* p_itsController = NULL;    
-    void init_Motor();
+    Controller* p_itsController = NULL;  
+
+    // Initialisation  
+    void init_Servo();
 
     public:
-    // Getter function
-    Stepper* get_ItsStepper();
-
-    // Controller setter function
+    // Getters & Setters
     void set_ItsController(Controller* arg);
 
     // Initialisation function

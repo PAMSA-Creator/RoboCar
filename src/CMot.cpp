@@ -3,23 +3,23 @@
 /* CMot */
 
 CMot::CMot(){
-    p_itsIMot = (IMot*) new(Controller);
+    p_itsAMot = new AMot();
+    p_itsIMan = NULL;
+    p_itsController = new Controller();
+    p_itsDCMotor = new DCMotor();
+    p_itsServo = new Servo();
 }
 
 CMot::~CMot(){
-    delete(p_itsIMot);
-}
-
-void CMot::set_ItsIMot(IMot* arg){
-    p_itsIMot = (NULL != arg) ? arg : NULL;
+    if(NULL != p_itsAMot) delete(p_itsAMot);
+    p_itsIMan = NULL;
+    if(NULL != p_itsController) delete p_itsController;
+    if(NULL != p_itsDCMotor) delete p_itsDCMotor;
+    if(NULL != p_itsServo) delete p_itsServo;
 }
 
 IMot* CMot::get_ItsIMot(){
-    return p_itsIMot;
-}
-
-IMan* CMot::CMot::get_ItsIMan(){
-    return p_itsIMan;
+    return (IMot*) p_itsAMot;
 }
 
 void CMot::set_ItsIMan(IMan* arg){
@@ -27,44 +27,75 @@ void CMot::set_ItsIMan(IMan* arg){
 }
 
 void CMot::init(){
-    p_itsIMot->init();
+    Serial.println("CMot::init()");
+    if(NULL != p_itsDCMotor) {
+        p_itsController->set_ItsDCMotor(p_itsDCMotor);
+    }
+    if(NULL != p_itsServo) {
+        p_itsController->set_ItsServo(p_itsServo);
+    }
+    if(NULL != p_itsController) {
+        p_itsDCMotor->set_ItsController(p_itsController);
+        p_itsServo->set_ItsController(p_itsController);
+        p_itsAMot->set_ItsController(p_itsController);
+    }
+
+    p_itsDCMotor->init();
+    p_itsServo->init();
+    p_itsController->init();
+    p_itsAMot->init();
+}
+
+AMot::AMot(){
+    // TBD
+}
+
+AMot::~AMot(){
+    // TBD
+}
+
+void AMot::init_AMot(){
+    // TBD
+    Serial.println("AMot::initAMot()");
+}
+
+void AMot::init(){
+    // TBD
+}
+
+void AMot::set_ItsController(Controller* arg){
+    p_itsController = (NULL != arg) ? arg : NULL;
 }
 
 /* Controller */
 Controller::Controller(){
-    p_itsDCMotor = new(DCMotor);
-    p_itsStepper = new(Stepper);
+    // TBD
 }
 
 Controller::~Controller(){
-    delete(p_itsDCMotor);
-    delete(p_itsStepper);
+    // TBD
 }
 
 void Controller::init_Controller(){
-    if(NULL != p_itsDCMotor) p_itsDCMotor->init();
-    if(NULL != p_itsStepper) p_itsStepper->init();
-}
-
-IMot* Controller::get_ItsIMot(){
-    return (IMot*) this;
-}
-
-void Controller::set_ItsCMot(CMot* arg){
-    p_itsCMot = (NULL != arg) ? arg : NULL;
+    Serial.println("Controller::init_Controller()");
 }
 
 void Controller::init(){
     this->init_Controller();
 }
 
-/* DCMotor */
-void DCMotor::init_Motor(){
-    Serial.println("DC motor initialised");
+void Controller::set_ItsDCMotor(DCMotor* arg){
+    p_itsDCMotor = (NULL != arg) ? arg : NULL;
 }
 
-DCMotor* DCMotor::get_ItsDCMotor(){
-    return this;
+void Controller::set_ItsServo(Servo* arg){
+    p_itsServo = (NULL != arg) ? arg : NULL;
+}
+
+
+/* DCMotor */
+void DCMotor::init_DCMotor(){
+    Serial.println("DCMotor::init_DCMotor()");
 }
 
 void DCMotor::set_ItsController(Controller* arg){
@@ -72,22 +103,18 @@ void DCMotor::set_ItsController(Controller* arg){
 }
 
 void DCMotor::init(){
-    this->init_Motor();
+    this->init_DCMotor();
 }
 
-/* Stepper */
-void Stepper::init_Motor(){
-    Serial.println("Stepper motor initialised");
+/* Servo */
+void Servo::init_Servo(){
+    Serial.println("Servo::init_Servo()");
 }
 
-Stepper* Stepper::get_ItsStepper(){
-    return this;
-}
-
-void Stepper::set_ItsController(Controller* arg){
+void Servo::set_ItsController(Controller* arg){
     p_itsController = (NULL != arg) ? arg : NULL;
 }
 
-void Stepper::init(){
-    this->init_Motor();
+void Servo::init(){
+    this->init_Servo();
 }
