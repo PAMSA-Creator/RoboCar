@@ -2,6 +2,7 @@
     TYPE:       COMPONENT
     NAME:       CSen
     INTERFACE:  ISen
+    ADAPTER:    ASen
     PORT:       p_itsISen
 
     CSen is the sensory subsystem for RoboCar.
@@ -15,29 +16,28 @@
 
 class CSen;
 class ISen;
+class ASen;
+class CentralSystem;
 class Ultrasonic;
 
 #include "CMan.h"
 
 class CSen{
     private:
-    ISen* p_itsISen = NULL;             // CSen port
-    IMan* p_itsIMan = NULL;             // CMan port
+    ASen* p_itsASen = NULL;                     // CSen Adapter (ASen)
+    IMan* p_itsIMan = NULL;                     // CMan port
+    CentralSystem* p_itsCentralSystem = NULL;   // CentralSystem object
+    Ultrasonic* p_itsUltrasonic = NULL;         // Ultrasonic object
 
-    // Interface (ICom) setter
-    void set_ItsISen(ISen* arg);
+    void init_ASen();
 
     public:
-    // Default constructor
+    // Default constructor & destructor
     CSen();
-    // Default destructor
     ~CSen();
 
-    // Interface (ICom) getter
+    // Getters & Setters
     ISen* get_ItsISen();
-
-    // IMan getter and setter
-    IMan* get_ItsIMan();
     void set_ItsIMan(IMan* arg);
 
     // Initialisation
@@ -45,50 +45,67 @@ class CSen{
 };
 
 class ISen{
-    protected:
-    CSen* p_itsCSen = NULL;
 
     public:
-    virtual ISen* get_ItsISen();
-    virtual void set_ItsCSen(CSen* arg);
     virtual void init();
 };
 
-class CentralSystem : public ISen{
+class ASen : public ISen{
+    private:
+    CentralSystem* p_itsCentralSystem = NULL;
+    Ultrasonic* p_itsUltrasonic = NULL;
+
+    // Initialisation
+    void init_ASen();
+
+    public:
+    // Default Constructor and Destructor
+    ASen();
+    ~ASen();
+
+    // Getters & Setters
+    void set_ItsCentralSystem(CentralSystem* arg);
+    void set_ItsUltrasonic(Ultrasonic* arg);
+
+    // Initialisation
+    void init();
+};
+
+class CentralSystem{
     private:
     Ultrasonic* p_itsUltrasonic = NULL;
 
-    // internal initialisation function
+    // Initialisation
     void init_CentralSystem();
 
     public:
-    // Default constructor and destructor
+    // Default Constructor and Destructor
     CentralSystem();
     ~CentralSystem();
 
-    // Getter function
-    ISen* get_ItsISen();
+    // Getters & Setters
+    void set_ItsUltrasonic(Ultrasonic* arg);
 
-    // CMot setter function
-    void set_ItsCSen(CSen* arg);
-
-    // Initialisation function
+    // Initialisation
     void init();
 };
 
 class Ultrasonic{
     private:
-    CentralSystem* p_itsCentralSystem = NULL;    
+    CentralSystem* p_itsCentralSystem = NULL;
+
+    // Initialisation
     void init_Ultrasonic();
 
     public:
-    // Getter function
-    Ultrasonic* get_ItsUltrasonic();
+    // Default Constructor and Destructor
+    Ultrasonic();
+    ~Ultrasonic();
 
-    // Controller setter function
+    // Getters & Setters
     void set_ItsCentralSystem(CentralSystem* arg);
 
-    // Initialisation function
+    // Initialisation
     void init();
 };
 

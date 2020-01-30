@@ -1,24 +1,27 @@
 #include "CSen.h"
 
+/* -------------------- CSen -------------------------- */
+/*
+Default constructor
+Build all internal objects
+*/
 CSen::CSen(){
-    p_itsISen = (ISen*) new (CentralSystem);             // CSen port
+    p_itsASen = new ASen();
+    IMan* p_itsIMan = NULL;
+    p_itsCentralSystem = new CentralSystem();
+    p_itsUltrasonic = new Ultrasonic();
 }
 
 CSen::~CSen(){
-    delete(p_itsISen);
+    if(NULL != p_itsASen) delete p_itsASen;
+    IMan* p_itsIMan = NULL;
+    if(NULL != p_itsCentralSystem) delete p_itsCentralSystem;
+    if(NULL != p_itsUltrasonic) delete p_itsUltrasonic;
 }
 
 /* CSen */
-void CSen::set_ItsISen(ISen* arg){
-    p_itsISen = (NULL != arg) ? arg : NULL;
-}
-
 ISen* CSen::get_ItsISen(){
-    return p_itsISen;
-}
-
-IMan* CSen::get_ItsIMan(){
-    return p_itsIMan;
+    return (ISen*) p_itsASen;
 }
 
 void CSen::set_ItsIMan(IMan* arg){
@@ -26,49 +29,98 @@ void CSen::set_ItsIMan(IMan* arg){
 }
 
 void CSen::init(){
-    p_itsISen->init();
+    Serial.println("CSen::init()");
+    if(NULL != p_itsUltrasonic){
+        p_itsCentralSystem->set_ItsUltrasonic(p_itsUltrasonic);
+        p_itsUltrasonic->init();
+    }else return;   // Catch exception
+    if(NULL != p_itsCentralSystem){
+        p_itsUltrasonic->set_ItsCentralSystem(p_itsCentralSystem);
+        p_itsCentralSystem->init();
+    }else return;   // Cathc exception
+    if(NULL != p_itsASen){
+        p_itsASen->set_ItsUltrasonic(p_itsUltrasonic);
+        p_itsASen->set_ItsCentralSystem(p_itsCentralSystem);
+        p_itsASen->init();
+    }
 }
 
-/* CentralSystem */
+/* -------------------- ASen -------------------------- */
+/*
+Default constructor
+TBD
+*/
+ASen::ASen(){
+    // TBD
+}
+
+ASen::~ASen(){
+    // TBD
+}
+
+void ASen::init_ASen(){
+    // TBD
+}
+
+void ASen::init(){
+    this->init_ASen();
+}
+
+void ASen::set_ItsCentralSystem(CentralSystem* arg){
+    this->p_itsCentralSystem = (NULL != arg) ? arg : NULL;
+}
+
+void ASen::set_ItsUltrasonic(Ultrasonic* arg){
+    this->p_itsUltrasonic = (NULL != arg) ? arg : NULL;
+}
+
+/* -------------------- CentralSystem -------------------------- */
+/*
+Default constructor
+TBD
+*/
 CentralSystem::CentralSystem(){
-    p_itsUltrasonic = new(Ultrasonic);
+    // TBD
 }
 
 CentralSystem::~CentralSystem(){
-    delete(p_itsUltrasonic);
+    // TBD
 }
 
 void CentralSystem::init_CentralSystem(){
-    p_itsUltrasonic->init();
+    Serial.println("CentralSystem::init_CentralSystem");
 }
 
-ISen* CentralSystem::get_ItsISen(){
-    return (ISen*) this;
-}
-
-// CMot setter function
-void CentralSystem::set_ItsCSen(CSen* arg){
-    p_itsCSen = (NULL != arg) ? arg : NULL;
-}
-
-// Initialisation function
 void CentralSystem::init(){
     this->init_CentralSystem();
 }
 
-/* Ultrasonic */
+void CentralSystem::set_ItsUltrasonic(Ultrasonic* arg){
+    this->p_itsUltrasonic = (NULL != arg) ? arg : NULL;
+}
+
+
+/* -------------------- Ultrasonic -------------------------- */
+/*
+Default constructor
+TBD
+*/
+Ultrasonic::Ultrasonic(){
+    // TBD
+}
+
+Ultrasonic::~Ultrasonic(){
+    // TBD
+}
+
 void Ultrasonic::init_Ultrasonic(){
-    Serial.println("Ultrasonic sensor initialised");
-}
-
-Ultrasonic* Ultrasonic::get_ItsUltrasonic(){
-    return this;
-}
-
-void Ultrasonic::set_ItsCentralSystem(CentralSystem* arg){
-    p_itsCentralSystem = (NULL != arg) ? arg : NULL;
+    Serial.println("Ultrasonic::init_Ultrasonic");
 }
 
 void Ultrasonic::init(){
     this->init_Ultrasonic();
+}
+
+void Ultrasonic::set_ItsCentralSystem(CentralSystem* arg){
+    this->p_itsCentralSystem = (NULL != arg) ? arg : NULL;
 }
