@@ -34,7 +34,7 @@ int RoboCar::init(){
     p_itsCMot->init();
     p_itsCSen->init();
 
-    Serial.println("RoboCar initialisation complete");
+    Serial.println("RoboCar::init()");
 
     return 0;
 }
@@ -42,7 +42,7 @@ int RoboCar::init(){
 void RoboCar::run(){
     static bool bRun = false;
     if(!bRun){
-        Serial.println("RoboCar is now running");
+        Serial.println("RoboCar::run()");
         bRun = true;
     }
 }
