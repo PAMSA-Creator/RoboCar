@@ -45,7 +45,7 @@ Check and set all relationships (pointers)
 void CCom::init(){
     Serial.println("CCom::init()");
     if(NULL != p_itsBluetooth){
-        p_itsBluetooth->init();                         // Initialise Bluetooth
+        p_itsBluetooth->init();                         // Initialise Bluetooth object
     } // !!! Need to catch exception !!!
 
     if(NULL != p_itsACom){
