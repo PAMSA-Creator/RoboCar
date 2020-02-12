@@ -51,7 +51,6 @@ void CCom::init(){
     if(NULL != p_itsACom){
         p_itsACom->set_ItsBluetooth(p_itsBluetooth);    // Set relationship with Bluetooth
         p_itsACom->init();                              // Initialise ACom
-        Serial.println("CCom initialised");
     } // !!! Need to catch exception !!!
     else Serial.println("!!! Failed to initialise CCom !!!");
 }
@@ -120,8 +119,10 @@ Bluetooth::~Bluetooth(){
 TBD
 */
 void Bluetooth::init_Bluetooth(){
-    Serial.println("Bluetooth::init_Bluetooth()");
-    Serial.begin(115200);
+    if(!Serial){
+        Serial.begin(115200);
+    }
+        Serial.println("Bluetooth::init_Bluetooth()");
 }
 
 /*

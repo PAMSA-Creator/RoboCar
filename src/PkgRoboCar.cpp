@@ -15,6 +15,8 @@ RoboCar::~RoboCar(){
 }
 
 int RoboCar::init(){
+    Serial.println("RoboCar::init()");
+
     if(NULL == p_itsCCom) return _ERRNO_NULL_POINTER_CCOM;
     if(NULL == p_itsCMot) return _ERRNO_NULL_POINTER_CMOT;
     if(NULL == p_itsCSen) return _ERRNO_NULL_POINTER_CSEN;
@@ -33,8 +35,6 @@ int RoboCar::init(){
     p_itsCMan->init();
     p_itsCMot->init();
     p_itsCSen->init();
-
-    Serial.println("RoboCar::init()");
 
     return 0;
 }
