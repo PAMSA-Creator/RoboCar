@@ -9,7 +9,7 @@ void setup()
     while (!Serial);
     Serial.println("RoboCar::setup()");
 	status = myRoboCar.init();
-    if(0 != status) Serial.println("Error initialising myRoboCar");
+    if(0 != status) Serial.println("Error initialising myRoboCar 1");
 }
 
 void loop()
