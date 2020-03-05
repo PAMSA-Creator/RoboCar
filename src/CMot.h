@@ -29,7 +29,8 @@ class CMot{
     AMot* p_itsAMot = NULL;             // CMot Adapter (AMot)
     IMan* p_itsIMan = NULL;             // CMan port
     Controller* p_itsController = NULL; // Controller  object
-    DCMotor* p_itsDCMotor = NULL;       // DCMotor object
+    DCMotor* p_itsDCMotorRight = NULL;       // DCMotor object
+    DCMotor* p_itsDCMotorLeft = NULL;       // DCMotor object
     Servo* p_itsServo = NULL;           // Servo object
 
     public:
@@ -72,7 +73,8 @@ class AMot : public IMot{
 
 class Controller{
     private:
-    DCMotor* p_itsDCMotor = NULL;
+    DCMotor* p_itsDCMotorRight = NULL;
+    DCMotor* p_itsDCMotorLeft = NULL;
     Servo* p_itsServo = NULL;
 
     // Initialisation
@@ -84,7 +86,8 @@ class Controller{
     ~Controller();
 
     // Getters & Setters
-    void set_ItsDCMotor(DCMotor* arg);
+    void set_ItsDCMotorRight(DCMotor* arg);
+    void set_ItsDCMotorLeft(DCMotor* arg);
     void set_ItsServo(Servo* arg);
 
     // Initialisation
@@ -93,7 +96,10 @@ class Controller{
 
 class DCMotor{
     private:
-    Controller* p_itsController = NULL;    
+    Controller* p_itsController = NULL; 
+    int EN;
+    int In1;
+    int In2 ; 
 
     // Initialisation
     void init_DCMotor();
@@ -103,7 +109,7 @@ class DCMotor{
     void set_ItsController(Controller* arg);
 
     // Initialisation
-    void init();
+    void init(int a,int b, int c );
 };
 
 class Servo{
