@@ -107,16 +107,36 @@ void Controller::set_ItsServo(Servo* arg){
     p_itsServo = arg;
 }
 
+void Controller::move_forward(int argSpeed){
+    p_itsDCMotorRight->run(argSpeed, true);
+    p_itsDCMotorLeft->run(argSpeed, true);
+}
+
+void Controller::spin_right(int argSpeed){
+    p_itsDCMotorRight->run(argSpeed, false);
+    p_itsDCMotorLeft->run(argSpeed, true);
+}
+
+void Controller::turn_right(int argSpeed){
+    p_itsDCMotorRight->run((int)((float)argSpeed/1.2), true);
+    p_itsDCMotorLeft->run(argSpeed, true);
+}
 
 /* DCMotor */
 void DCMotor::init_DCMotor(){
-     Serial.println("DCMotor::init_DCMotor()");
-     Serial.print("Enable pin is:");
-     Serial.println(EN);
-     Serial.print("In1 pin is:");
-     Serial.println(In1);
-     Serial.print("In2 pin is:");
-     Serial.println(In2);
+    //  Serial.println("DCMotor::init_DCMotor()");
+    //  Serial.print("Enable pin is:");
+    //  Serial.println(EN);
+    //  Serial.print("In1 pin is:");
+    //  Serial.println(In1);
+    //  Serial.print("In2 pin is:");
+    //  Serial.println(In2);
+
+    // Initialise the enable pin as analogue output
+
+    // Initialise In1 pin as digital output
+
+    // Initialise In2 pin as digital output
 }
 
 void DCMotor::set_ItsController(Controller* arg){
@@ -124,12 +144,28 @@ void DCMotor::set_ItsController(Controller* arg){
 }
 
 void DCMotor::init(int a,int b, int c){
-    EN = a;
-    In1 = b;
-    In2 = c;
+    EN = a;     // Enable pin
+    In1 = b;    // In1 pin
+    In2 = c;    // In2 pin
 
     this->init_DCMotor();
+}
 
+void DCMotor::run(int argSpeed, bool argDirection){
+    // Set In1 and In2 based on argDirection
+    if(false == argDirection){
+        digitalWrite(In1, LOW);
+        digitalWrite(In2, HIGH);
+    }
+    else{
+        digitalWrite(In1, LOW);
+        digitalWrite(In2, HIGH);
+    }
+
+    // Write PWN value to EN based on argSpeed
+    // First cap the value at 255 if it is greater
+    int speed = (255 >= argSpeed) ? argSpeed : 255;
+    analogWrite(EN, argSpeed);
 }
 
 /* Servo */

@@ -92,6 +92,9 @@ class Controller{
 
     // Initialisation
     void init();
+    void move_forward(int argSpeed);
+    void spin_right(int argSpeed);
+    void turn_right(int argSpeed);
 };
 
 class DCMotor{
@@ -109,7 +112,8 @@ class DCMotor{
     void set_ItsController(Controller* arg);
 
     // Initialisation
-    void init(int a,int b, int c );
+    void init(int a,int b, int c);
+    void run(int argSpeed, bool argDirection);
 };
 
 class Servo{
