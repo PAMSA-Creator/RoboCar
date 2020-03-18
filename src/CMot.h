@@ -92,6 +92,9 @@ class Controller{
 
     // Initialisation
     void init();
+
+    // Actions
+    void motionCommand(char arg);
     void move_forward(int argSpeed);
     void spin_right(int argSpeed);
     void turn_right(int argSpeed);

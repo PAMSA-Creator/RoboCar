@@ -107,6 +107,22 @@ void Controller::set_ItsServo(Servo* arg){
     p_itsServo = arg;
 }
 
+void Controller:motionCommand(char arg){
+    // First is to breakdown the arg into CID and speed
+    // char itsCID = // calculate
+    // char itsSpeed = // calculate from only 16 values available (from 0 to 15) when speed is 15 then argSpeed = 255 (increment is 17)
+    
+    // From CID, determine the motion to execute
+    // switch statement
+        // Move forward is issued when the CID is 0x8x
+        // Move backward is issued when the CID is 0x9x
+        // spin right is issued when the CID is 0xAx
+        // spin left is issued when the CID is 0xBx
+        // turn right, turn left, etc ...
+
+}
+
+
 void Controller::move_forward(int argSpeed){
     p_itsDCMotorRight->run(argSpeed, true);
     p_itsDCMotorLeft->run(argSpeed, true);
