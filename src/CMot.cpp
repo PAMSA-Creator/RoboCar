@@ -145,6 +145,7 @@ void DCMotor::set_ItsController(Controller* arg){
 
 void DCMotor::init(int a,int b, int c){
     EN = a;     // Enable pin
+<<<<<<< Updated upstream
     In1 = b;    // In1 pin
     In2 = c;    // In2 pin
 
@@ -166,6 +167,12 @@ void DCMotor::run(int argSpeed, bool argDirection){
     // First cap the value at 255 if it is greater
     int speed = (255 >= argSpeed) ? argSpeed : 255;
     analogWrite(EN, argSpeed);
+=======
+    In1 = b;    // In 1
+    In2 = c;    // In 2
+
+    this->init_DCMotor();
+>>>>>>> Stashed changes
 }
 
 /* Servo */
