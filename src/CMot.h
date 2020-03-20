@@ -54,7 +54,7 @@ class IMot{
 
 class AMot : public IMot{
     private:
-    Controller* p_itsController = NULL;
+    Controller* p_itsController = NULL; //Controller object
 
     // Initialisation
     void init_AMot();
@@ -73,36 +73,30 @@ class AMot : public IMot{
 
 class Controller{
     private:
-    DCMotor* p_itsDCMotorRight = NULL;
-    DCMotor* p_itsDCMotorLeft = NULL;
+    DCMotor* p_itsDCMotorRight = NULL; //DCMotor object
+    DCMotor* p_itsDCMotorLeft = NULL;  //DCMotor object
     Servo* p_itsServo = NULL;
-
     // Initialisation
     void init_Controller();
 
     public:
+    // Initialisation
+    void init();
     // Default Constructor & Destructor
     Controller();
     ~Controller();
-
     // Getters & Setters
     void set_ItsDCMotorRight(DCMotor* arg);
     void set_ItsDCMotorLeft(DCMotor* arg);
     void set_ItsServo(Servo* arg);
-
-    // Initialisation
-    void init();
-
     // Actions
-    void motionCommand(char arg);
-    void move_forward(int argSpeed);
-    void spin_right(int argSpeed);
-    void turn_right(int argSpeed);
+    int motionCommand(char arg);
+    int binaryToDecimal (int n);
 };
 
 class DCMotor{
     private:
-    Controller* p_itsController = NULL; 
+    Controller* p_itsController = NULL; //Controller object
     int EN;
     int In1;
     int In2 ; 
@@ -113,10 +107,11 @@ class DCMotor{
     public:
     // Getters & Setters
     void set_ItsController(Controller* arg);
-
     // Initialisation
     void init(int a,int b, int c);
+    // Actions
     void run(int argSpeed, bool argDirection);
+    void stop();
 };
 
 class Servo{
