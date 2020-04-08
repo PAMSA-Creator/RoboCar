@@ -76,22 +76,25 @@ class Controller{
     DCMotor* p_itsDCMotorRight = NULL; //DCMotor object
     DCMotor* p_itsDCMotorLeft = NULL;  //DCMotor object
     Servo* p_itsServo = NULL;
+
     // Initialisation
     void init_Controller();
 
     public:
     // Initialisation
     void init();
+
     // Default Constructor & Destructor
     Controller();
     ~Controller();
+
     // Getters & Setters
     void set_ItsDCMotorRight(DCMotor* arg);
     void set_ItsDCMotorLeft(DCMotor* arg);
     void set_ItsServo(Servo* arg);
+
     // Actions
     int motionCommand(char arg);
-    int binaryToDecimal (int n);
 };
 
 class DCMotor{
@@ -107,10 +110,12 @@ class DCMotor{
     public:
     // Getters & Setters
     void set_ItsController(Controller* arg);
+
     // Initialisation
     void init(int a,int b, int c);
+    
     // Actions
-    void run(int argSpeed, bool argDirection);
+    void run(char argSpeed, bool argDirection);
     void stop();
 };
 

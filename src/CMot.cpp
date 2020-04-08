@@ -107,73 +107,54 @@ void Controller::set_ItsServo(Servo* arg){
     p_itsServo = arg;
 }
 
-int Controller::motionCommand(int arg){
-    // First is to breakdown the arg into CID and speed
-int data = arg;
-int lowerNibble=0, upperNibble=0, temp=0, bSpeed=0, bCID=0;
-lowerNibble= data & 0xF ; //getting the first 4 bits by using the bitwise AND & with 0xF which is equal to 0b1111
-temp= data - lowerNibble; // that will make the first 4 bits values equal to 0 and will maintain the original last 4 bits of data
-upperNibble= temp>>4; // using the shift right >> bitwise operator and it'll shift the MSB 4 times so that they become LSB
-return lowerNibble, upperNibble;
-// Serial.print ("bSpeed =");
-//Serial.println (lowerNibble);
-//Serial.print ("bCID =");
-//Serial.println (upperNibble);
-}
-int Controller::binaryToDecimal (int n){
-    int num = n, dec=0, rem=0, base=1;  // initialising base value to 1 (i.e.2^0)
-    while (num>0){
-           rem=num%10; // this remainder is going to be the LSB of the binary number
-           dec=dec+rem*base; //updating the decimal value untill the while condition is not true
-           num=num/10; // this is going to get rid of the remainder (i.e. the LSB) and will keep the rest of the number
-           base=base*2; //this is going to be the next base value (2^1 , 2^2 , 2^3, etc)
-        }
-    return dec;
-}
-// int itsSpeed = // calculate from only 16 values available (from 0 to 15) when speed is 15 then argSpeed = 255 (increment is 17)
-//call the conversion function
-int Speed = binaryToDecimal (bSpeed);
-// int itsCID = // calculate
-// function call
-int CID = binaryToDecimal (bCID);
-// From CID, determine the motion to execute
-switch (CID)
-{
-    // Move forward is issued when the CID is 8
-    case 8: 
-    p_itsDCMotorRight->run(argSpeed, true);
-    p_itsDCMotorLeft->run(argSpeed, true);
-    break;
-    // Move backward is issued when the CID is 9
-    case 9:
-    p_itsDCMotorRight->run(argSpeed, false);
-    p_itsDCMotorLeft->run(argSpeed, false);
-    break;
-    // spin right is issued when the CID is 10
-    case 10:
-    p_itsDCMotorRight->run(argSpeed, false);
-    p_itsDCMotorLeft->run(argSpeed, true);
-    break;
-    // spin left is issued when the CID is 11
-    case 11:
-    p_itsDCMotorRight->run(argSpeed, true);
-    p_itsDCMotorLeft->run(argSpeed, false);
-    break;
-    // turn right is issued when the CID is 12
-    case 12:
-    p_itsDCMotorRight->run((int)((float)argSpeed/1.2), true);
-    p_itsDCMotorLeft->run(argSpeed, true);
-    break;
-    //turn left is issued when the CID is 13
-    case 13:
-    p_itsDCMotorRight->run(argSpeed, true);
-    p_itsDCMotorLeft->run((int)((float)argSpeed/1.2), true);
-    break;
-    //stop is issued when the CID is 14
-    case 14:
-    p_itsDCMotorRight->stop();
-    p_itsDCMotorLeft->stop();
-    break;
+int Controller::motionCommand(char arg){
+    // First is to breakdown the arg (message) into CID and speed
+    // The lowest significant 4 bits are the speed information
+    // The highest significant 4 bits are the command identifier itself
+
+    // calculate from only 16 values available (from 0 to 15) when speed is 15 then argSpeed = 255 (increment is 17)
+    char speed = (arg & 0xF) * 17;
+    char CID = arg >> 4;
+
+    // Run the command depending on CID
+    switch (CID)
+    {
+        // Move forward is issued when the CID is 8 (0x8) (1000b)
+        case 8: 
+            p_itsDCMotorRight->run(speed, true);
+            p_itsDCMotorLeft->run(speed, true);
+            break;
+        // Move backward is issued when the CID is 9 (0x9) (1001b)
+        case 9:
+            p_itsDCMotorRight->run(speed, false);
+            p_itsDCMotorLeft->run(speed, false);
+            break;
+        // spin right is issued when the CID is 10 (0xA) (1010b)
+        case 10:
+            p_itsDCMotorRight->run(speed, false);
+            p_itsDCMotorLeft->run(speed, true);
+            break;
+        // spin left is issued when the CID is 11 (0xB) (1011b)
+        case 11:
+            p_itsDCMotorRight->run(speed, true);
+            p_itsDCMotorLeft->run(speed, false);
+            break;
+        // turn right is issued when the CID is 12 (0xC) (1100b)
+        case 12:
+            p_itsDCMotorRight->run((char)((float)argSpeed/1.2), true);
+            p_itsDCMotorLeft->run(speed, true);
+            break;
+        //turn left is issued when the CID is 13 (0xD) (1101b)
+        case 13:
+            p_itsDCMotorRight->run(speed, true);
+            p_itsDCMotorLeft->run((char)((float)speed/1.2), true);
+            break;
+        //stop is issued when the CID is 14 (0xE) (1110b)
+        case 14:
+            p_itsDCMotorRight->stop();
+            p_itsDCMotorLeft->stop();
+            break;
+    }
 }
 
 /* DCMotor */
@@ -204,7 +185,7 @@ void DCMotor::init(int a,int b, int c){
     this->init_DCMotor();
 }
 
-void DCMotor::run(int argSpeed, bool argDirection){
+void DCMotor::run(char argSpeed, bool argDirection){
     // Set In1 and In2 based on argDirection
     if(false == argDirection){
         digitalWrite(In1, LOW);
@@ -214,17 +195,15 @@ void DCMotor::run(int argSpeed, bool argDirection){
         digitalWrite(In1, HIGH);
         digitalWrite(In2, LOW);
     }
+
+    analogWrite(EN, speed);
+}
+
 void DCMotor::stop(){
     analogWrite(EN,0);
     digitalWrite(In1,LOW);
     digitalWrite(In2,LOW);
 }
-    // Write PWN value to EN based on argSpeed
-    // First cap the value at 255 if it is greater
-    int speed = (255 >= argSpeed) ? argSpeed : 255;
-    analogWrite(EN, speed);
-}
-
 
 /* Servo */
 void Servo::init_Servo(){
