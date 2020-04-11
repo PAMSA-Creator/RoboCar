@@ -1,6 +1,6 @@
 {
     "env": {
-        "arduino.path": "${HOME}/Applications/ArduinoIDE/arduino-1.8.10/",
+        "arduino.path": "${HOME}/Applications/arduino-1.8.12/",
         "arduino.avr.include.path": "${env:arduino.path}/hardware/arduino/avr",
         "arduino.tools.include.path": "${env:arduino.path}/hardware/tools/avr",
         "arduino.avr.compiler.path": "${env:arduino.path}/hardware/tools/avr/bin/avr-gcc",

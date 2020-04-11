@@ -141,7 +141,7 @@ int Controller::motionCommand(char arg){
             break;
         // turn right is issued when the CID is 12 (0xC) (1100b)
         case 12:
-            p_itsDCMotorRight->run((char)((float)argSpeed/1.2), true);
+            p_itsDCMotorRight->run((char)((float)speed/1.2), true);
             p_itsDCMotorLeft->run(speed, true);
             break;
         //turn left is issued when the CID is 13 (0xD) (1101b)
@@ -196,7 +196,7 @@ void DCMotor::run(char argSpeed, bool argDirection){
         digitalWrite(In2, LOW);
     }
 
-    analogWrite(EN, speed);
+    analogWrite(EN, argSpeed);
 }
 
 void DCMotor::stop(){
