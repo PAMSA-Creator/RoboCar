@@ -6,8 +6,20 @@ Default constructor
 Build all internal objects
 */
 CTst::CTst(){
+    // Create a new Test Adapter (ATst) object
     p_itsATst = new ATst();
+
+    // Create all emulated component adapters
+    ATstMan* p_itsATstMan = new (ATstMan);   // Adapter to an emulated CMan component if required
+    ATstCom* p_itsATstCom = new (ATstCom);   // Adapter to an emulated CCom component if required
+    ATstMot* p_itsATstMot = new (ATstMot);   // Adapter to an emulated CMot component if required
+    ATstSen* p_itsATstSen = new (ATstSen);   // Adapter to an emulated CSen component if required
+
+
+    // Create a Tester object
     p_itsTester = new Tester();
+
+    // Set all other interfaces to NULL until initialisation
     p_itsICom = NULL;
     p_itsIMot = NULL;
     p_itsISen = NULL;
@@ -17,6 +29,10 @@ CTst::~CTst(){
     p_itsICom = NULL;
     p_itsIMot = NULL;
     p_itsISen = NULL;
+    if(NULL != p_itsATstSen) delete(p_itsATstSen);
+    if(NULL != p_itsATstMot) delete(p_itsATstMot);
+    if(NULL != p_itsATstCom) delete(p_itsATstCom);
+    if(NULL != p_itsATstMan) delete(p_itsATstMan);
     if(NULL != p_itsATst) delete(p_itsATst);
     if(NULL != p_itsTester) delete(p_itsTester);
 }
@@ -109,7 +125,7 @@ void CTst::init(){
     } // !!! Need to catch exception !!!
 }
 
-/* --------------------- ACom ------------------------- */
+/* --------------------- ATst ------------------------- */
 /*
 Default constructor
 */
@@ -143,6 +159,150 @@ void ATst::init_ATst(){
 
 void ATst::init(){
     this->init_ATst();
+}
+
+/* --------------------- ATstMan ------------------------- */
+/*
+Default constructor
+*/
+ATstMan::ATstMan(){
+    // TBD
+}
+
+/*
+Default destructor
+*/
+ATstMan::~ATstMan(){
+    // TBD
+}
+
+/*
+Setter: set_ItsTester
+Pass a valid Tester pointer to local variable p_itsTester or nullify
+*/
+void ATstMan::set_ItsTester(Tester* arg){
+    p_itsTester = (NULL != arg) ? arg : NULL;
+    // !!! Need to catch exception !!!
+};
+
+/*
+Initilisation
+Initialise ATstMan
+*/
+void ATstMan::init_ATstMan(){
+    Serial.println("ATstMan::init_ATstMan()");
+}
+
+void ATstMan::init(){
+    this->init_ATstMan();
+}
+
+/* --------------------- ATstCom ------------------------- */
+/*
+Default constructor
+*/
+ATstCom::ATstCom(){
+    // TBD
+}
+
+/*
+Default destructor
+*/
+ATstCom::~ATstCom(){
+    // TBD
+}
+
+/*
+Setter: set_ItsTester
+Pass a valid Tester pointer to local variable p_itsTester or nullify
+*/
+void ATstCom::set_ItsTester(Tester* arg){
+    p_itsTester = (NULL != arg) ? arg : NULL;
+    // !!! Need to catch exception !!!
+};
+
+/*
+Initilisation
+Initialise ATstCom
+*/
+void ATstCom::init_ATstCom(){
+    Serial.println("ATstCom::init_ATstCom()");
+}
+
+void ATstCom::init(){
+    this->init_ATstCom();
+}
+
+/* --------------------- ATstMot ------------------------- */
+/*
+Default constructor
+*/
+ATstMot::ATstMot(){
+    // TBD
+}
+
+/*
+Default destructor
+*/
+ATstMot::~ATstMot(){
+    // TBD
+}
+
+/*
+Setter: set_ItsTester
+Pass a valid Tester pointer to local variable p_itsTester or nullify
+*/
+void ATstMot::set_ItsTester(Tester* arg){
+    p_itsTester = (NULL != arg) ? arg : NULL;
+    // !!! Need to catch exception !!!
+};
+
+/*
+Initilisation
+Initialise ATstMot
+*/
+void ATstMot::init_ATstMot(){
+    Serial.println("ATstMot::init_ATstMot()");
+}
+
+void ATstMot::init(){
+    this->init_ATstMot();
+}
+
+/* --------------------- ATstSen ------------------------- */
+/*
+Default constructor
+*/
+ATstSen::ATstSen(){
+    // TBD
+}
+
+/*
+Default destructor
+*/
+ATstSen::~ATstSen(){
+    // TBD
+}
+
+/*
+Setter: set_ItsTester
+Pass a valid Tester pointer to local variable p_itsTester or nullify
+*/
+void ATstSen::set_ItsTester(Tester* arg){
+    p_itsTester = (NULL != arg) ? arg : NULL;
+    // !!! Need to catch exception !!!
+};
+
+/*
+Initilisation
+Initialise ATstSen
+*/
+void ATstSen::init_ATstSen(){
+    Serial.println("ATstSen::init_ATstSen()");
+}
+
+void ATstSen::init(){
+    this->init_ATstSen();
 }
 
 /* -------------------- Tester -------------------------- */
