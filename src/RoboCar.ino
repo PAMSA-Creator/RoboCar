@@ -19,7 +19,7 @@
 */
 // Check is _RELEASE_BUILD was defined
 // If _RELEASE_BUILD has been defined, let's build it.
-#if  defined(_RELEASE_BUILD)
+#if defined( _RELEASE_BUILD )
 
 // First include the RoboCar Package so we can build it
 #include "PkgRoboCar.h"
@@ -48,7 +48,8 @@ void loop()
 
 // If _RELEASE_BUILD was commented out (not defined), check if _TEST_BUILD was defiend
 // If _TEST_BUILD has been defined, let's build it.
-#elif   defined(_TEST_BUILD)
+#elif defined( _TEST_BUILD )
+
 // In this build we will build the RoboTest Package instead. We must first include it.
 #include "PkgRoboTest.h"
 
@@ -73,4 +74,5 @@ void loop()
         bLoop = true;
     }
 }
+
 #endif

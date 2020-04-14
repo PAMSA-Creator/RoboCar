@@ -22,11 +22,51 @@ CTst::~CTst(){
 }
 
 /*
-Getter: get_ItsITst
-Return an ITst pointer to the ATst adapter
+    Getter: get_ItsITst
+    Return an ITst pointer to the ATst adapter
 */
 ITst* CTst::get_ItsITst(){
     return (ITst*) p_itsATst;    
+}
+
+/*
+    Getter: get_ItsITstMan
+    Return an IMan pointer to the ATstMan adapter (emulated Central Control subsystem)
+*/
+IMan* CTst::get_ItsITstMan(){
+    return (IMan*) p_itsATstMan;
+}
+
+/*
+    Getter: get_ItsITstCom
+    Return an ICom pointer to the ATstCom adapter (emulated Communication subsystem)
+*/
+ICom* CTst::get_ItsITstCom(){
+    return (ICom*) p_itsATstCom;
+}
+
+/*
+    Getter: get_ItsITstMot
+    Return an IMot pointer to the ATstMot adapter (emulated Motion Controller subsystem)
+*/
+IMot* CTst::get_ItsITstMot(){
+    return (IMot*) p_itsATstMot;
+}
+
+/*
+    Getter: get_ItsITstSen
+    Return an ISen pointer to the ATstSen adapter (emulated Sensory subsystem)
+*/
+ISen* CTst::get_ItsITstSen(){
+    return (ISen*) p_itsATstSen;
+}
+
+/*
+Setter: set_ItsIMan
+Pass a valid IMan point to local variable p_itsIMan or nullify
+*/
+void CTst::set_ItsIMan(IMan* arg){
+    p_itsIMan = (NULL != arg) ? arg : NULL;
 }
 
 /*

@@ -6,29 +6,48 @@
     PORT:       p_itsITst
 
     CTst is the test subsystem for RoboCar.
+    It implements the necessary interfaces to emulate all necessary components.
 */
 #ifndef _C_TEST_H
 #define _C_TEST_H
 
+// Include the main Arduino.h header file
 #include <Arduino.h>
 
+// Declare the classes before calling the other components header files to allow for class names to be known
 class CTst;
 class ITst;
 class ATst;
+class ATstMan;
+class ATstCom;
+class ATstMot;
+class ATstSen;
 class Tester;
 
+// Include all other components header files
 #include "CMan.h"
 #include "CCom.h"
 #include "CMot.h"
 #include "CSen.h"
 
-/* Class CTst (Component) */
+/*
+    Define the Class CTst (Component).
+    The aim of this component is to instanciate all necessary objects for CTest to work.
+    If a component is build as part of the _TEST_BUILD by the PkgRoboTest then its pointer will be used.
+    Inversely if the component is not built, then CTest will emulate it and must therefore provide the interface.
+    For this reason, the CTst component implements all emulated interfaces by default (ITstMan, ITstCom, ITstMot, ITstSen).
+*/
 class CTst{
     private:
     ATst* p_itsATst = NULL;     // CTst Adapter (ATst)
-    ICom* p_itsICom = NULL;     // CCom port
-    IMot* p_itsIMot = NULL;     // CMot port
-    ISen* p_itsISen = NULL;     // CSen port
+    ATstMan* p_itsATstMan = NULL;   // Adapter to an emulated CMan component if required
+    ATstCom* p_itsATstCom = NULL;   // Adapter to an emulated CCom component if required
+    ATstMot* p_itsATstMot = NULL;   // Adapter to an emulated CMot component if required
+    ATstSen* p_itsATstSen = NULL;   // Adapter to an emulated CSen component if required
+    IMan* p_itsIMan = NULL;     // CMan port if required
+    ICom* p_itsICom = NULL;     // CCom port if required
+    IMot* p_itsIMot = NULL;     // CMot port if required
+    ISen* p_itsISen = NULL;     // CSen port if required
     Tester* p_itsTester = NULL;   // Tester object
 
     public:
@@ -38,6 +57,10 @@ class CTst{
 
     // Getter & Setters
     ITst* get_ItsITst();
+    IMan* get_ItsITstMan();
+    ICom* get_ItsITstCom();
+    IMot* get_ItsITstMot();
+    ISen* get_ItsITstSen();
     void set_ItsIMan(IMan* arg);
     void set_ItsICom(ICom* arg);
     void set_ItsIMot(IMot* arg);
@@ -78,7 +101,98 @@ class ATst:public ITst{
     // Behaviour
 };
 
-/* Tester class */
+class ATstMan:public IMan{
+    private:
+    /* Pointer to Tester object */
+    Tester* p_itsTester = NULL;
+
+    /* Initialisation */
+    void init_ATstMan();
+
+    public:
+    // Default constructor & destructor
+    ATstMan();
+    ~ATstMan();
+
+    // Getters & Setters
+    void set_ItsTester(Tester* arg);
+
+    // Initialisation
+    void init();
+
+    // Behaviour
+};
+
+class ATstCom:public ICom{
+    private:
+    /* Pointer to Tester object */
+    Tester* p_itsTester = NULL;
+
+    /* Initialisation */
+    void init_ATstCom();
+
+    public:
+    // Default constructor & destructor
+    ATstCom();
+    ~ATstCom();
+
+    // Getters & Setters
+    void set_ItsTester(Tester* arg);
+
+    // Initialisation
+    void init();
+
+    // Behaviour
+};
+
+class ATstMot:public IMot{
+    private:
+    /* Pointer to Tester object */
+    Tester* p_itsTester = NULL;
+
+    /* Initialisation */
+    void init_ATstMot();
+
+    public:
+    // Default constructor & destructor
+    ATstMot();
+    ~ATstMot();
+
+    // Getters & Setters
+    void set_ItsTester(Tester* arg);
+
+    // Initialisation
+    void init();
+
+    // Behaviour
+};
+
+class ATstSen:public ISen{
+    private:
+    /* Pointer to Tester object */
+    Tester* p_itsTester = NULL;
+
+    /* Initialisation */
+    void init_ATstSen();
+
+    public:
+    // Default constructor & destructor
+    ATstSen();
+    ~ATstSen();
+
+    // Getters & Setters
+    void set_ItsTester(Tester* arg);
+
+    // Initialisation
+    void init();
+
+    // Behaviour
+};
+
+/*
+    Tester class
+    The Tester class implements the logic behind each emulated coponent.
+*/
 class Tester{
     private:
     void init_Tester();
