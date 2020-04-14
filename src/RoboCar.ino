@@ -4,14 +4,24 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
 
+// Define _RELEASE_BUILD to build the release version
 //#define _RELEASE_BUILD
+
+// If _RELEASE_BUILD is commented out then let's build the _TEST_BUILD isntead
 #if !defined( _RELEASE_BUILD )
     #define _TEST_BUILD
 #endif
 
-/* Build starts here */
+/*
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! Builds start here               !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+*/
+// Check is _RELEASE_BUILD was defined
+// If _RELEASE_BUILD has been defined, let's build it.
 #if  defined(_RELEASE_BUILD)
-/* Only build this code if _RELEASE_BUILD is defined */
+
+// First include the RoboCar Package so we can build it
 #include "PkgRoboCar.h"
 
 RoboCar myRoboCar;
@@ -36,11 +46,13 @@ void loop()
     }
 }
 
+// If _RELEASE_BUILD was commented out (not defined), check if _TEST_BUILD was defiend
+// If _TEST_BUILD has been defined, let's build it.
 #elif   defined(_TEST_BUILD)
-/* Only build this code if _TST_BUILD is defined */
-#include "PkgRoboTst.h"
+// In this build we will build the RoboTest Package instead. We must first include it.
+#include "PkgRoboTest.h"
 
-RoboTst myRoboTst;
+RoboTest myRoboTest;
 byte status = 0;
 
 void setup()
@@ -48,7 +60,7 @@ void setup()
     Serial.begin(115200);
     while (!Serial);
     Serial.println("RoboTst::setup()");
-	status = myRoboTst.init();
+	status = myRoboTest.init();
     if(0 != status) Serial.println("Error initialising myRoboTst");
 }
 
@@ -57,7 +69,7 @@ void loop()
     static bool bLoop = false;
     if(!bLoop) {
         Serial.println("RoboTst::loop()");
-        myRoboTst.run();
+        myRoboTest.run();
         bLoop = true;
     }
 }

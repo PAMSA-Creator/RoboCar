@@ -1,29 +1,31 @@
-#ifndef _PKG_ROBOTST_H
-#define _PKG_ROBOTST_H
+#ifndef _PKG_ROBOTEST_H
+#define _PKG_ROBOTEST_H
 
 #include <Arduino.h>
 
-class RoboTst;
+class RoboTest;
 
 #include "ErrorCodes.h"
 #include "CMan.h"
 #include "CCom.h"
 #include "CMot.h"
 #include "CSen.h"
+#include "CTst.h"
 
-class RoboTst{
+class RoboTest{
     private:
     CMan* p_itsCMan = NULL;
     CCom* p_itsCCom = NULL;
     CMot* p_itsCMot = NULL;
     CSen* p_itsCSen = NULL;
+    CTst* p_itsCTst = NULL;
 
     public:
     // Default constructor
-    RoboTst();
+    RoboTest();
 
     // Default destructor
-    ~RoboTst();
+    ~RoboTest();
 
     // Initialisation function
     int init();
