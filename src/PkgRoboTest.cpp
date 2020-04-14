@@ -154,4 +154,19 @@ void RoboTest::run(){
         Serial.println("RoboTest::run()");
         bRun = true;
     }
+    else{
+        /*
+            !!! CONDUCT THE TEST !!!
+            FIRST ASSIGNMENT:    Set the wheels in motion
+            Create a runTest() function in the CTst->Tester class that will read an input from the keyboard and send the command to the CMot->Controller.
+            Authorised keyboard inputs are all numerical single digit characters (0,1,2,3,4,5,6,7,8,9).
+            To pass the information between components you must use the interfaces.
+            The runTest() function must be called using the CTst interface so the equivalent function must be declared by ITst and implemented by ATst.
+            To use a fuction from an interface the pointer to the said interface may not need to be stored locally but can be accessed as follows:
+                p_itsComponent->get_ItsInterface()->functionCall();
+        */
+       
+        // Call the runTest() function from ITst, the CTst interface
+        
+    }
 }
