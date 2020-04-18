@@ -35,7 +35,8 @@ class Tester;
     The aim of this component is to instanciate all necessary objects for CTest to work.
     If a component is build as part of the _TEST_BUILD by the PkgRoboTest then its pointer will be used.
     Inversely if the component is not built, then CTest will emulate it and must therefore provide the interface.
-    For this reason, the CTst component implements all emulated interfaces by default (ITstMan, ITstCom, ITstMot, ITstSen).
+    For this reason, the CTst component implements all emulated interfaces by default (ITstMan, ITstCom, ITstMot, 
+    ITstSen).
 */
 class CTst{
     private:
@@ -56,15 +57,16 @@ class CTst{
     ~CTst();
 
     // Getter & Setters
-    ITst* get_ItsITst();
-    IMan* get_ItsITstMan();
-    ICom* get_ItsITstCom();
-    IMot* get_ItsITstMot();
-    ISen* get_ItsITstSen();
+    
     void set_ItsIMan(IMan* arg);
     void set_ItsICom(ICom* arg);
     void set_ItsIMot(IMot* arg);
     void set_ItsISen(ISen* arg);
+    ITst* get_ItsITst(); //The function return type is a pointer (i.e. ITst*) to the interface of CTst component.
+    IMan* get_ItsITstMan();
+    ICom* get_ItsITstCom();
+    IMot* get_ItsITstMot();
+    ISen* get_ItsITstSen();
 
     // Initialisation
     void init();
@@ -101,7 +103,7 @@ class ATst:public ITst{
     // Behaviour
 };
 
-class ATstMan:public IMan{
+class ATstMan:public IMan{ //the ":" operator is for inheritance (i.e ATstMan inherites publicly from IMan)?
     private:
     /* Pointer to Tester object */
     Tester* p_itsTester = NULL;

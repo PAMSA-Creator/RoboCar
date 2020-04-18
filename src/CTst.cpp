@@ -15,7 +15,6 @@ CTst::CTst(){
     ATstMot* p_itsATstMot = new (ATstMot);   // Adapter to an emulated CMot component if required
     ATstSen* p_itsATstSen = new (ATstSen);   // Adapter to an emulated CSen component if required
 
-
     // Create a Tester object
     p_itsTester = new Tester();
 

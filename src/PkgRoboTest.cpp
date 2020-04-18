@@ -18,12 +18,13 @@
 #define _CMOT_EMU   false
 #define _CSEN_EMU   true
 
-RoboTest::RoboTest(){
+RoboTest::RoboTest(){ //RoboTest() is the package constructor,(N.B.the constructor is always named after the class name)
     // The test component always gets created
     p_itsCTst = new(CTst);
 
     // All other components are either instanciated as normal or emulated by CTst
-#if (false == _CMAN_EMU)
+#if (false == _CMAN_EMU) /* "#if()" that's called a preprocessor if and it's only preprocessed at the first step of 
+compiling the program, whereas the normal if(){}, is handeled at run time when the program is executed.*/
     p_itsCMan = new(CMan);
 #endif
 #if (false == _CCOM_EMU)
@@ -150,23 +151,25 @@ int RoboTest::init(){
 
 void RoboTest::run(){
     static bool bRun = false;
-    if(!bRun){
+    if(!bRun){  //if true
         Serial.println("RoboTest::run()");
         bRun = true;
     }
     else{
-        /*
-            !!! CONDUCT THE TEST !!!
-            
-            FIRST ASSIGNMENT:    Set the wheels in motion
-            Create a runTest() function in the Tester class (CTst) that will read an input from the keyboard and send the command to a Controller class (CMot).
-            Authorised keyboard inputs are all numerical single digit characters (0,1,2,3,4,5,6,7,8,9).
-            To pass the information between components you must use the interfaces.
-            The runTest() function must be called using the CTst interface so the equivalent function must be declared in ITst and implemented by ATst.
-            To use a fuction from an interface the pointer to the said interface may not need to be stored locally but can be accessed as follows:
+               /*FIRST ASSIGNMENT:    Set the wheels in motion
+                Create a runTest() function in the Tester class (CTst) that will read an input from the keyboard and 
+            send the command to a Controller class (CMot).*/
+
+               /* Authorised keyboard inputs are all numerical single digit characters (0,1,2,3,4,5,6,7,8,9).
+                To pass the information between components you must use the interfaces.*/
+
+               /* The runTest() function must be called using the CTst interface so the equivalent function must be 
+            declared in ITst and implemented by ATst.*/
+
+               /* To use a fuction from an interface the pointer to the said interface may not need to be stored 
+            locally but can be accessed as follows:
                 p_itsComponent->get_ItsInterface()->functionCall();
-                example: p_itsCTst->get_ItsITst()->init();
-        */
+                example: p_itsCTst->get_ItsITst()->init(); */
        
         // Call the runTest() function from ITst, the CTst interface
     }
