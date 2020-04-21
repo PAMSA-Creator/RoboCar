@@ -60,25 +60,24 @@ int RoboTest::init(){
     // CTst is always instanciated
     if(NULL == p_itsCTst) return _ERRNO_NULL_POINTER_CTST;
     // Other components are created depending on directives
+    // We need to set the interfaces correctly
+    // First we start with CTest and set all pointers, included NULL ones
 #if (false == _CMAN_EMU)
     if(NULL == p_itsCMan) return _ERRNO_NULL_POINTER_CMAN;
+    p_itsCTst->set_ItsIMan(p_itsCMan->get_ItsIMan());
 #endif
 #if (false == _CCOM_EMU)
     if(NULL == p_itsCCom) return _ERRNO_NULL_POINTER_CCOM;
+    p_itsCTst->set_ItsICom(p_itsCCom->get_ItsICom());
 #endif
 #if (false == _CMOT_EMU)
     if(NULL == p_itsCMot) return _ERRNO_NULL_POINTER_CMOT;
+    p_itsCTst->set_ItsIMot(p_itsCMot->get_ItsIMot());
 #endif
 #if (false == _CSEN_EMU)
     if(NULL == p_itsCSen) return _ERRNO_NULL_POINTER_CSEN;
-#endif
-
-    // We need to set the interfaces correctly
-    // First we start with CTest and set all pointers, included NULL ones
-    p_itsCTst->set_ItsIMan(p_itsCMan->get_ItsIMan());
-    p_itsCTst->set_ItsICom(p_itsCCom->get_ItsICom());
-    p_itsCTst->set_ItsIMot(p_itsCMot->get_ItsIMot());
     p_itsCTst->set_ItsISen(p_itsCSen->get_ItsISen());
+#endif
 
     // Now we set each component interfaces as required.
     // If a component exists we use the instanciated interface.
@@ -154,20 +153,18 @@ void RoboTest::run(){
         Serial.println("RoboTest::run()");
         bRun = true;
     }
-    else{
-        /*
-            !!! CONDUCT THE TEST !!!
-            
-            FIRST ASSIGNMENT:    Set the wheels in motion
-            Create a runTest() function in the Tester class (CTst) that will read an input from the keyboard and send the command to a Controller class (CMot).
-            Authorised keyboard inputs are all numerical single digit characters (0,1,2,3,4,5,6,7,8,9).
-            To pass the information between components you must use the interfaces.
-            The runTest() function must be called using the CTst interface so the equivalent function must be declared in ITst and implemented by ATst.
-            To use a fuction from an interface the pointer to the said interface may not need to be stored locally but can be accessed as follows:
-                p_itsComponent->get_ItsInterface()->functionCall();
-                example: p_itsCTst->get_ItsITst()->init();
-        */
-       
+    /*
+        !!! CONDUCT THE TEST !!!
+        
+        FIRST ASSIGNMENT:    Set the wheels in motion
+        Create a runTest() function in the Tester class (CTst) that will read an input from the keyboard and send the command to a Controller class (CMot).
+        Authorised keyboard inputs are all numerical single digit characters (0,1,2,3,4,5,6,7,8,9).
+        To pass the information between components you must use the interfaces.
+        The runTest() function must be called using the CTst interface so the equivalent function must be declared in ITst and implemented by ATst.
+        To use a fuction from an interface the pointer to the said interface may not need to be stored locally but can be accessed as follows:
+            p_itsComponent->get_ItsInterface()->functionCall();
+            example: p_itsCTst->get_ItsITst()->init();
+    */
+    
         // Call the runTest() function from ITst, the CTst interface
-    }
 }

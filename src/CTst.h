@@ -118,6 +118,7 @@ class ATstMan:public IMan{
     void set_ItsTester(Tester* arg);
 
     // Initialisation
+    // Implementation of the pure virtual function init() declared in IMan
     void init();
 
     // Behaviour
