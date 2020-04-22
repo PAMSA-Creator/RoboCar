@@ -196,6 +196,7 @@ class ATstSen:public ISen{
     The Tester class implements the logic behind each emulated coponent.
 */
 class Tester{
+    //Initialisation
     private:
     void init_Tester();
 
@@ -210,6 +211,7 @@ class Tester{
     void init();
 
     // Behaviour
+    void runTest(byte Input);
 };
 
 #endif

@@ -70,9 +70,9 @@ void loop()
     static bool bLoop = false;
     if(!bLoop) {
         Serial.println("RoboTst::loop()");
-        myRoboTest.run();
         bLoop = true;
     }
+    myRoboTest.run();
 }
 
 #endif

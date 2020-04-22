@@ -330,3 +330,17 @@ void Tester::init_Tester(){
 void Tester::init(){
     this->init_Tester();
 }
+ // Behaviour
+void Tester::runTest(byte Input){ // the "byte" variable type can range from 0-255
+Serial.println("Please Enter your command, you can enter values between 0 and 9!");
+while(Serial.available() >0);
+Input = Serial.read();
+for (byte i=0; i<9 ; i++){
+    if (Input==i){
+        byte Command = Input;
+    }
+    else {
+        Serial.println ("That's an invalid value!");
+    }
+}
+}
