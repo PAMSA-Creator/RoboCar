@@ -27,8 +27,7 @@
 RoboCar myRoboCar;
 byte status = 0;
 
-void setup()
-{
+void setup(){
     Serial.begin(115200);
     while (!Serial);
     Serial.println("RoboCar::setup()");
@@ -36,14 +35,13 @@ void setup()
     if(0 != status) Serial.println("Error initialising myRoboCar");
 }
 
-void loop()
-{
+void loop(){
     static bool bLoop = false;
     if(!bLoop) {
         Serial.println("RoboCar::loop()");
-        myRoboCar.run();
         bLoop = true;
     }
+    myRoboCar.run();
 }
 
 // If _RELEASE_BUILD was commented out (not defined), check if _TEST_BUILD was defiend
@@ -56,24 +54,31 @@ void loop()
 RoboTest myRoboTest;
 byte status = 0;
 
-void setup()
-{
+void setup(){
+    // First we setup and open the serial port
     Serial.begin(115200);
+    // Check if Serial is ready
     while (!Serial);
+    // When ready, print something to inform us where we are
     Serial.println("RoboTst::setup()");
+    // Run the initialisation function
 	status = myRoboTest.init();
+    // Check for status message and if error is reporting, flag it up
     if(0 != status) Serial.println("Error initialising myRoboTst");
 }
 
-void loop()
-{
+void loop(){
+    // Create a static variable to hold the value of the bLoop variable
     static bool bLoop = false;
+
+    // Test if it's the first time we enter the loop function
     if(!bLoop) {
+        // If first time then print something
         Serial.println("RoboTst::loop()");
+        // Set bLoop to 'true' to avoid printing again at the next round
         bLoop = true;
     }
+    // Execute the run function
     myRoboTest.run();
-    
 }
-
 #endif

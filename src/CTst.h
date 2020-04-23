@@ -122,6 +122,7 @@ class ATstMan:public IMan{ //the ":" operator is for inheritance (i.e ATstMan in
     void set_ItsTester(Tester* arg);
 
     // Initialisation
+    // Implementation of the pure virtual function init() declared in IMan
     void init();
 
     // Behaviour

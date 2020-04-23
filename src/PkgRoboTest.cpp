@@ -61,6 +61,8 @@ int RoboTest::init(){
     // CTst is always instanciated
     if(NULL == p_itsCTst) return _ERRNO_NULL_POINTER_CTST;
     // Other components are created depending on directives
+    // We need to set the interfaces correctly
+    // First we start with CTest and set all pointers, included NULL ones
 #if (false == _CMAN_EMU)
     if(NULL == p_itsCMan) return _ERRNO_NULL_POINTER_CMAN;
     p_itsCTst->set_ItsIMan(p_itsCMan->get_ItsIMan());
@@ -77,13 +79,6 @@ int RoboTest::init(){
     if(NULL == p_itsCSen) return _ERRNO_NULL_POINTER_CSEN;
     p_itsCTst->set_ItsISen(p_itsCSen->get_ItsISen());
 #endif
-
-    // We need to set the interfaces correctly
-    // First we start with CTest and set all pointers, included NULL ones
- 
-    
-    
-    
 
     // Now we set each component interfaces as required.
     // If a component exists we use the instanciated interface.
@@ -177,5 +172,4 @@ void RoboTest::run(){
                 example: p_itsCTst->get_ItsITst()->init(); */
        
         // Call the runTest() function from ITst, the CTst interface
-    }
 }
