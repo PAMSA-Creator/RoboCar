@@ -78,6 +78,7 @@ class CTst{
 class ITst{
     public:
     virtual void init();
+    virtual void runATest();
 };
 
 /* Adapter class */
@@ -87,7 +88,7 @@ class ATst:public ITst{
     Tester* p_itsTester = NULL;
 
     /* Initialisation */
-    void init_ATst();
+    void init_ATst(); //private initialisation
 
     public:
     // Default constructor & destructor
@@ -98,12 +99,13 @@ class ATst:public ITst{
     void set_ItsTester(Tester* arg);
 
     // Initialisation
-    void init();
+    void init();  //public initialisation (the interface initialisation ITst)
 
     // Behaviour
+    void runATest();
 };
 
-class ATstMan:public IMan{ //the ":" operator is for inheritance (i.e ATstMan inherites publicly from IMan)?
+class ATstMan:public IMan{ //the ":" operator is for inheritance (i.e ATstMan inherites publicly from IMan)
     private:
     /* Pointer to Tester object */
     Tester* p_itsTester = NULL;

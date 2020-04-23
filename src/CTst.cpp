@@ -159,6 +159,11 @@ void ATst::init_ATst(){
 void ATst::init(){
     this->init_ATst();
 }
+//Behaviour
+void ATst::runATest(){
+    Serial.println ("runATest is being executed");
+    p_itsTester->runTest();
+}
 
 /* --------------------- ATstMan ------------------------- */
 /*
@@ -337,7 +342,10 @@ while(Serial.available() >0);
 Input = Serial.read();
 for (byte i=0; i<9 ; i++){
     if (Input==i){
-        byte Command = Input;
+        char Command = Input;
+        p_itsTester->p_itsATstMan->get_ItsITstMot(); /*This is to access the interface of CMot to be able to send 
+        the command*/
+        p_itsIMot-> motionCommand(Command); // this is to pass the command value
     }
     else {
         Serial.println ("That's an invalid value!");

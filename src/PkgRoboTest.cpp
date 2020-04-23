@@ -63,7 +63,7 @@ int RoboTest::init(){
     // Other components are created depending on directives
 #if (false == _CMAN_EMU)
     if(NULL == p_itsCMan) return _ERRNO_NULL_POINTER_CMAN;
-       p_itsCTst->set_ItsIMan(p_itsCMan->get_ItsIMan());
+    p_itsCTst->set_ItsIMan(p_itsCMan->get_ItsIMan());
 #endif
 #if (false == _CCOM_EMU)
     if(NULL == p_itsCCom) return _ERRNO_NULL_POINTER_CCOM;
@@ -159,6 +159,7 @@ void RoboTest::run(){
         Serial.println("RoboTest::run()");
         bRun = true;
     }
+    p_itsCTst->get_ItsITst()->runATest();
     else{
                /*FIRST ASSIGNMENT:    Set the wheels in motion
                 Create a runTest() function in the Tester class (CTst) that will read an input from the keyboard and 
