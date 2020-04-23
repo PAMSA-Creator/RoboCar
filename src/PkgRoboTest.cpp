@@ -88,7 +88,7 @@ int RoboTest::init(){
     #if (false == _CMAN_EMU)
     p_itsCCom->set_ItsIMan(p_itsCMan->get_ItsIMan());
     #else
-    p_itsCCom->set_ItsIMan(p_itsCTst->get_ItsITstMan());
+    p_itsCCom->set_ItsIMan(p_itsCTst->get_ItsIMan());
     #endif
 #endif
 
@@ -96,7 +96,7 @@ int RoboTest::init(){
     #if (false == _CMAN_EMU)
     p_itsCMot->set_ItsIMan(p_itsCMan->get_ItsIMan());
     #else
-    p_itsCMot->set_ItsIMan(p_itsCTst->get_ItsITstMan());
+    p_itsCMot->set_ItsIMan(p_itsCTst->get_ItsIMan());
     #endif
 #endif
 
@@ -104,7 +104,7 @@ int RoboTest::init(){
     #if (false == _CMAN_EMU)
     p_itsCSen->set_ItsIMan(p_itsCMan->get_ItsIMan());
     #else
-    p_itsCSen->set_ItsITst(p_itsCMan->get_ItsITstMan());
+    p_itsCSen->set_ItsITst(p_itsCMan->get_ItsIMan());
     #endif
 #endif
 
@@ -112,19 +112,19 @@ int RoboTest::init(){
     #if(false == _CCOM_EMU)
     p_itsCMan->set_ItsICom(p_itsCCom->get_ItsICom());       // Real Icom
     #else
-    p_itsCMan->set_ItsICom(p_itsCTst->get_ItsITstCom());    // Emulated Icom
+    p_itsCMan->set_ItsICom(p_itsCTst->get_ItsICom());    // Emulated Icom
     #endif
 
     #if(false == _CMOT_EMU)
     p_itsCMan->set_ItsIMot(p_itsCMot->get_ItsIMot());       // Real IMot
     #else
-    p_itsCMan->set_ItsIMot(p_itsCTst->get_ItsITstMot());    // Emulated IMot
+    p_itsCMan->set_ItsIMot(p_itsCTst->get_ItsIMot());    // Emulated IMot
     #endif
 
     #if(false == _CSEN_EMU)
     p_itsCMan->set_ItsISen(p_itsCSen->get_ItsISen());       // Real ISen
     #else
-    p_itsCMan->set_ItsISen(p_itsCTst->get_ItsITstSen());    // Emulated ISen
+    p_itsCMan->set_ItsISen(p_itsCTst->get_ItsISen());    // Emulated ISen
     #endif
 #endif
 
@@ -154,22 +154,18 @@ void RoboTest::run(){
         Serial.println("RoboTest::run()");
         bRun = true;
     }
+    /*FIRST ASSIGNMENT:    Set the wheels in motion
+    Create a runTest() function in the Tester class (CTst) that will read an input from the keyboard and send the command to a Controller class (CMot).
+
+    Authorised keyboard inputs are all numerical single digit characters (0,1,2,3,4,5,6,7,8,9).
+    To pass the information between components you must use the interfaces.
+
+    The runTest() function must be called using the CTst interface so the equivalent function must be declared in ITst and implemented by ATst.
+
+    To use a fuction from an interface the pointer to the said interface may not need to be stored locally but can be accessed as follows:
+    p_itsComponent->get_ItsInterface()->functionCall();
+    example: p_itsCTst->get_ItsITst()->init();*/
+
+    // Call the runTest() function from ITst, the CTst interface
     p_itsCTst->get_ItsITst()->runATest();
-    else{
-               /*FIRST ASSIGNMENT:    Set the wheels in motion
-                Create a runTest() function in the Tester class (CTst) that will read an input from the keyboard and 
-            send the command to a Controller class (CMot).*/
-
-               /* Authorised keyboard inputs are all numerical single digit characters (0,1,2,3,4,5,6,7,8,9).
-                To pass the information between components you must use the interfaces.*/
-
-               /* The runTest() function must be called using the CTst interface so the equivalent function must be 
-            declared in ITst and implemented by ATst.*/
-
-               /* To use a fuction from an interface the pointer to the said interface may not need to be stored 
-            locally but can be accessed as follows:
-                p_itsComponent->get_ItsInterface()->functionCall();
-                example: p_itsCTst->get_ItsITst()->init(); */
-       
-        // Call the runTest() function from ITst, the CTst interface
 }

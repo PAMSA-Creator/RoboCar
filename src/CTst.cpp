@@ -46,34 +46,54 @@ ITst* CTst::get_ItsITst(){
 
 /*
     Getter: get_ItsITstMan
-    Return an IMan pointer to the ATstMan adapter (emulated Central Control subsystem)
+    Return an IMan pointer to the ATstMan adapter (emulated subsystem)
+    Return an IMan pointer to the CMan adapter if the component exists
 */
-IMan* CTst::get_ItsITstMan(){
-    return (IMan*) p_itsATstMan;
+IMan* CTst::get_ItsIMan(){
+    // Return the pointer that exists
+    if(NULL != p_itsATstMan)
+        return (IMan*) p_itsATstMan;
+    else if(NULL != p_itsIMan)
+        return (IMan*) p_itsIMan;
 }
 
 /*
     Getter: get_ItsITstCom
-    Return an ICom pointer to the ATstCom adapter (emulated Communication subsystem)
+    Return an ICom pointer to the ATstCom adapter (emulated subsystem)
+    Return an ICom pointer to the CCom adapter if the component exists
 */
-ICom* CTst::get_ItsITstCom(){
-    return (ICom*) p_itsATstCom;
+ICom* CTst::get_ItsICom(){
+    // Return the pointer that exists
+    if(NULL != p_itsATstCom)
+        return (ICom*) p_itsATstCom;
+    else if(NULL != p_itsICom)
+        return (ICom*) p_itsICom;
 }
 
 /*
     Getter: get_ItsITstMot
-    Return an IMot pointer to the ATstMot adapter (emulated Motion Controller subsystem)
+    Return an IMot pointer to the ATstMot adapter (emulated subsystem)
+    Return an IMot pointer to the CMot adapter if the component exists
 */
-IMot* CTst::get_ItsITstMot(){
-    return (IMot*) p_itsATstMot;
+IMot* CTst::get_ItsIMot(){
+    // Return the pointer that exists
+    if(NULL != p_itsATstMot)
+        return (IMot*) p_itsATstMot;
+    else if(NULL != p_itsIMot)
+        return (IMot*) p_itsIMot;
 }
 
 /*
     Getter: get_ItsITstSen
-    Return an ISen pointer to the ATstSen adapter (emulated Sensory subsystem)
+    Return an ISen pointer to the ATstSen adapter (emulated subsystem)
+    Return an ISen pointer to the CSen adapter if the component exists
 */
-ISen* CTst::get_ItsITstSen(){
-    return (ISen*) p_itsATstSen;
+ISen* CTst::get_ItsISen(){
+    // Return the pointer that exists
+    if(NULL != p_itsATstSen)
+        return (ISen*) p_itsATstSen;
+    else if(NULL != p_itsISen)
+        return (ISen*) p_itsISen;
 }
 
 /*
@@ -115,8 +135,11 @@ Check and set all relationships (pointers)
 void CTst::init(){
     Serial.println("CTst::init()");
     if(NULL != p_itsTester){
-        p_itsTester->init();                         // Initialise Tester
-    } // !!! Need to catch exception !!!
+        // Set the CTest pointer
+        p_itsTester->set_ItsCTst(this);
+        // Then initialise Tester
+        p_itsTester->init();
+    }
 
     if(NULL != p_itsATst){
         p_itsATst->set_ItsTester(p_itsTester);        // Set relationship with Tester
@@ -324,6 +347,10 @@ Tester::~Tester(){
     // TBD
 }
 
+void Tester::set_ItsCTst(CTst* arg){
+    p_itsCTst = (NULL != arg) ? arg : NULL;
+}
+
 /*
 Initilisation
 Initialise Tester
@@ -336,19 +363,31 @@ void Tester::init(){
     this->init_Tester();
 }
  // Behaviour
-void Tester::runTest(byte Input){ // the "byte" variable type can range from 0-255
-Serial.println("Please Enter your command, you can enter values between 0 and 9!");
-while(Serial.available() >0);
-Input = Serial.read();
-for (byte i=0; i<9 ; i++){
-    if (Input==i){
-        char Command = Input;
-        p_itsTester->p_itsATstMan->get_ItsITstMot(); /*This is to access the interface of CMot to be able to send 
-        the command*/
-        p_itsIMot-> motionCommand(Command); // this is to pass the command value
+void Tester::runTest(void){
+    // The "byte" variable type can range from 0-255
+    Serial.println("Please Enter your command, you can enter values between 0 and 9!");
+    
+    // Check for user input on the serial interface
+    while(Serial.available() > 0);
+
+    // Read the input from the Serial interface and store in a 'command' variable
+    char input = Serial.read();
+
+    // Check that 'command' is between 0 and 9 only
+    // Remember that we are dealing with ASCII code at this stage
+    // ASCII code for '0' is 48 (0011 0000) and ASCII cde for '9' is 57 (0011 1001)
+    if((input >= '0') && (input <= '9')){
+        // First we need to convert from the ASCII code to the correct command
+        // 1. Get the decimal value of the character
+        char value = input - '0';   /* Remember this trick */
+
+        // 2. Set the correct direction
+        char command = (value << 4) & 0xFF00;
+
+        // Get the interface to CMot from p_itsCTest and call the motionCommand() function passing 'command' as argument
+        p_itsCTst->get_ItsIMot()->motionCommand(command);
     }
     else {
         Serial.println ("That's an invalid value!");
     }
-}
 }

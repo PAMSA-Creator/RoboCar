@@ -69,12 +69,17 @@ void AMot::init_AMot(){
     Serial.println("AMot::initAMot()");
 }
 
+void AMot::set_ItsController(Controller* arg){
+    p_itsController = (NULL != arg) ? arg : NULL;
+}
+
 void AMot::init(){
     this->init_AMot() ;
 }
 
-void AMot::set_ItsController(Controller* arg){
-    p_itsController = (NULL != arg) ? arg : NULL;
+int AMot::motionCommand(char arg){
+    // Call the function from the Controller object
+    return p_itsController->motionCommand(arg);
 }
 
 /* Controller */

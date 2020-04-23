@@ -47,9 +47,9 @@ class CMot{
 };
 
 class IMot{
-
     public:
     virtual void init();
+    virtual int motionCommand(char arg);
 };
 
 class AMot : public IMot{
@@ -69,6 +69,9 @@ class AMot : public IMot{
 
     // Initialisation
     void init();
+
+    // Behaviour
+    int motionCommand(char arg);
 };
 
 class Controller{

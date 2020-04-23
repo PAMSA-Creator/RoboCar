@@ -57,16 +57,15 @@ class CTst{
     ~CTst();
 
     // Getter & Setters
-    
     void set_ItsIMan(IMan* arg);
     void set_ItsICom(ICom* arg);
     void set_ItsIMot(IMot* arg);
     void set_ItsISen(ISen* arg);
     ITst* get_ItsITst(); //The function return type is a pointer (i.e. ITst*) to the interface of CTst component.
-    IMan* get_ItsITstMan();
-    ICom* get_ItsITstCom();
-    IMot* get_ItsITstMot();
-    ISen* get_ItsITstSen();
+    IMan* get_ItsIMan();
+    ICom* get_ItsICom();
+    IMot* get_ItsIMot();
+    ISen* get_ItsISen();
 
     // Initialisation
     void init();
@@ -199,8 +198,11 @@ class ATstSen:public ISen{
     The Tester class implements the logic behind each emulated coponent.
 */
 class Tester{
-    //Initialisation
     private:
+    // Pointer to CTest
+    CTst* p_itsCTst = NULL;
+
+    // Initialisation
     void init_Tester();
 
     public:
@@ -209,12 +211,13 @@ class Tester{
     ~Tester();
 
     // Getters and Setters
+    void set_ItsCTst(CTst* arg);
 
     // Initialisation
     void init();
 
     // Behaviour
-    void runTest(byte Input);
+    void runTest(void);
 };
 
 #endif
