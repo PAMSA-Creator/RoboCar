@@ -47,14 +47,14 @@ class CMot{
 };
 
 class IMot{
-
     public:
     virtual void init();
+    virtual int motionCommand(char arg);
 };
 
 class AMot : public IMot{
     private:
-    Controller* p_itsController = NULL;
+    Controller* p_itsController = NULL; //Controller object
 
     // Initialisation
     void init_AMot();
@@ -69,18 +69,24 @@ class AMot : public IMot{
 
     // Initialisation
     void init();
+
+    // Behaviour
+    int motionCommand(char arg);
 };
 
 class Controller{
     private:
-    DCMotor* p_itsDCMotorRight = NULL;
-    DCMotor* p_itsDCMotorLeft = NULL;
+    DCMotor* p_itsDCMotorRight = NULL; //DCMotor object
+    DCMotor* p_itsDCMotorLeft = NULL;  //DCMotor object
     Servo* p_itsServo = NULL;
 
     // Initialisation
     void init_Controller();
 
     public:
+    // Initialisation
+    void init();
+
     // Default Constructor & Destructor
     Controller();
     ~Controller();
@@ -90,19 +96,13 @@ class Controller{
     void set_ItsDCMotorLeft(DCMotor* arg);
     void set_ItsServo(Servo* arg);
 
-    // Initialisation
-    void init();
-
     // Actions
-    void motionCommand(char arg);
-    void move_forward(int argSpeed);
-    void spin_right(int argSpeed);
-    void turn_right(int argSpeed);
+    int motionCommand(char arg);
 };
 
 class DCMotor{
     private:
-    Controller* p_itsController = NULL; 
+    Controller* p_itsController = NULL; //Controller object
     int EN;
     int In1;
     int In2 ; 
@@ -116,7 +116,10 @@ class DCMotor{
 
     // Initialisation
     void init(int a,int b, int c);
-    void run(int argSpeed, bool argDirection);
+    
+    // Actions
+    void run(char argSpeed, bool argDirection);
+    void stop();
 };
 
 class Servo{

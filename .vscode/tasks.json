@@ -3,7 +3,7 @@
         {
             "type": "shell",
             "label": "avr-gcc build active file",
-            "command": "${HOME}/Applications/ArduinoIDE/arduino-1.8.10//hardware/tools/avr/bin/avr-gcc",
+            "command": "${HOME}/Applications/arduino-1.8.12//hardware/tools/avr/bin/avr-gcc",
             "args": [
                 "-g",
                 "${file}",
@@ -11,7 +11,7 @@
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "${HOME}/Applications/ArduinoIDE/arduino-1.8.10//hardware/tools/avr/bin"
+                "cwd": "${HOME}/Applications/arduino-1.8.12//hardware/tools/avr/bin"
             }
         },
         {
