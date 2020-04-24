@@ -185,7 +185,6 @@ void DCMotor::set_ItsController(Controller* arg){
 
 void DCMotor::init(int a,int b, int c){
     EN = a;     // Enable pin
-<<<<<<< Updated upstream
     In1 = b;    // In1 pin
     In2 = c;    // In2 pin
     this->init_DCMotor();
@@ -203,12 +202,6 @@ void DCMotor::run(char argSpeed, bool argDirection){
     }
 
     analogWrite(EN, argSpeed);
-=======
-    In1 = b;    // In 1
-    In2 = c;    // In 2
-
-    this->init_DCMotor();
->>>>>>> Stashed changes
 }
 
 void DCMotor::stop(){
