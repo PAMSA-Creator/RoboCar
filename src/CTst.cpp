@@ -19,15 +19,17 @@ CTst::CTst(){
     p_itsTester = new Tester();
 
     // Set all other interfaces to NULL until initialisation
+    p_itsIMan = NULL;
     p_itsICom = NULL;
     p_itsIMot = NULL;
     p_itsISen = NULL;
 }
 
 CTst::~CTst(){
-    p_itsICom = NULL;
-    p_itsIMot = NULL;
     p_itsISen = NULL;
+    p_itsIMot = NULL;
+    p_itsICom = NULL;
+    p_itsIMan = NULL;
     if(NULL != p_itsATstSen) delete(p_itsATstSen);
     if(NULL != p_itsATstMot) delete(p_itsATstMot);
     if(NULL != p_itsATstCom) delete(p_itsATstCom);
@@ -55,6 +57,8 @@ IMan* CTst::get_ItsIMan(){
         return (IMan*) p_itsATstMan;
     else if(NULL != p_itsIMan)
         return (IMan*) p_itsIMan;
+    else
+        return NULL;
 }
 
 /*
@@ -68,6 +72,8 @@ ICom* CTst::get_ItsICom(){
         return (ICom*) p_itsATstCom;
     else if(NULL != p_itsICom)
         return (ICom*) p_itsICom;
+   else
+        return NULL;
 }
 
 /*
@@ -81,6 +87,8 @@ IMot* CTst::get_ItsIMot(){
         return (IMot*) p_itsATstMot;
     else if(NULL != p_itsIMot)
         return (IMot*) p_itsIMot;
+   else
+        return NULL;
 }
 
 /*
@@ -94,6 +102,8 @@ ISen* CTst::get_ItsISen(){
         return (ISen*) p_itsATstSen;
     else if(NULL != p_itsISen)
         return (ISen*) p_itsISen;
+   else
+        return NULL;
 }
 
 /*
@@ -101,7 +111,7 @@ Setter: set_ItsIMan
 Pass a valid IMan point to local variable p_itsIMan or nullify
 */
 void CTst::set_ItsIMan(IMan* arg){
-    p_itsIMan = (NULL != arg) ? arg : NULL;
+    p_itsIMan = (NULL != arg) ? arg : (IMan*) p_itsATstMan;
 }
 
 /*
@@ -109,7 +119,7 @@ Setter: set_ItsICom
 Pass a valid ICom point to local variable p_itsICom or nullify
 */
 void CTst::set_ItsICom(ICom* arg){
-    p_itsICom = (NULL != arg) ? arg : NULL;
+    p_itsICom = (NULL != arg) ? arg : (ICom*) p_itsATstCom;
 }
 
 /*
@@ -117,7 +127,7 @@ Setter: set_ItsIMot
 Pass a valid IMot point to local variable p_itsIMot or nullify
 */
 void CTst::set_ItsIMot(IMot* arg){
-    p_itsIMot = (NULL != arg) ? arg : NULL;
+    p_itsIMot = (NULL != arg) ? arg : (IMot*) p_itsATstMot;
 }
 
 /*
@@ -125,7 +135,7 @@ Setter: set_ItsISen
 Pass a valid ISen point to local variable p_itsISen or nullify
 */
 void CTst::set_ItsISen(ISen* arg){
-    p_itsISen = (NULL != arg) ? arg : NULL;
+    p_itsISen = (NULL != arg) ? arg : (ISen*) p_itsATstSen;
 }
 
 /*
@@ -368,10 +378,13 @@ void Tester::runTest(void){
     Serial.println("Please Enter your command, you can enter values between 0 and 9!");
     
     // Check for user input on the serial interface
-    while(Serial.available() > 0);
+    while(Serial.available() == 0);
 
     // Read the input from the Serial interface and store in a 'command' variable
     char input = Serial.read();
+    // Serial.print("Got a character: ");
+    // Serial.print(input, DEC);
+    // Serial.println();
 
     // Check that 'command' is between 0 and 9 only
     // Remember that we are dealing with ASCII code at this stage
@@ -380,11 +393,24 @@ void Tester::runTest(void){
         // First we need to convert from the ASCII code to the correct command
         // 1. Get the decimal value of the character
         char value = input - '0';   /* Remember this trick */
+        // Serial.println("Converted to Decimal: ");
+        // Serial.print(value, DEC);
+        // Serial.println();
 
         // 2. Set the correct direction
-        char command = (value << 4) & 0xFF00;
+        // Remember that the top-most bit is set to 1 for direction CID
+        char command = 0x80 | ((value << 4) & 0xF0);
+
+        /* Change to the correct command required for the motion that we want to do */
+        /* See CMOt for the correct command - translate from keyboard input to CID */
+
+        // 3. Set the correct speed
+        command |= 0x08;
 
         // Get the interface to CMot from p_itsCTest and call the motionCommand() function passing 'command' as argument
+        // Serial.println("Sending motionCommand: ");
+        // Serial.print(char(command), BIN);
+        // Serial.println();
         p_itsCTst->get_ItsIMot()->motionCommand(command);
     }
     else {

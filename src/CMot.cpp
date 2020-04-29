@@ -118,7 +118,7 @@ int Controller::motionCommand(char arg){
     // The highest significant 4 bits are the command identifier itself
 
     // calculate from only 16 values available (from 0 to 15) when speed is 15 then argSpeed = 255 (increment is 17)
-    char speed = (arg & 0xF) * 17;
+    char speed = (arg & 0x0F) * 17;
     char CID = arg >> 4;
 
     // Run the command depending on CID

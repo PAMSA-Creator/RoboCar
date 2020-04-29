@@ -56,7 +56,7 @@ byte status = 0;
 
 void setup(){
     // First we setup and open the serial port
-    Serial.begin(115200);
+    Serial.begin(9600);
     // Check if Serial is ready
     while (!Serial);
     // When ready, print something to inform us where we are
