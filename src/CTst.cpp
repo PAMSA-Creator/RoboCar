@@ -396,17 +396,15 @@ void Tester::runTest(void){
         // First we need to convert from the ASCII code to the correct command
         // 1. Get the decimal value of the character
         char value = input - '0';   /* Remember this trick */
-       Serial.println("Converted to Decimal: ");
-       Serial.print(value,DEC);
-       Serial.println();
-                                     
+        Serial.println("Converted to Decimal: ");
+        Serial.print(value,DEC);
+        Serial.println();
+                                        
         // 2. Set the correct direction
         // Remember that the top-most bit is set to 1 for direction CID
         //char command = 0x80 | ((value << 4) & 0xF0);
-
-
-        char command = (value<<4) & 0xF0; /*here I made that so that the input values are still the same varying 
-        betwwen 1 and 9 and I also changed their corresponding values in the CMot.cpp to be matching*/
+        /* AH >> Here I made that so that the input values are still the same varying between 1 and 9 and I also changed their corresponding values in the CMot.cpp to be matching*/
+        char command = (value<<4) & 0xF0;
 
 
         /* Change to the correct command required for the motion that we want to do */

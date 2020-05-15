@@ -142,35 +142,47 @@ int Controller::motionCommand(char arg){
         case 6:
             p_itsDCMotorRight->run(speed, false);
             p_itsDCMotorLeft->run(speed, true);
+            Serial.println("The car is spinning right!");
             break;
         // spin left is issued when the CID is 11 (0xB) (1011b)
         case 4:
             p_itsDCMotorRight->run(speed, true);
             p_itsDCMotorLeft->run(speed, false);
+            Serial.println("The car is spinning left!");
             break;
         // turn right forward is issued when the CID is 12 (0xC) (1100b)
         case 9:
             p_itsDCMotorRight->run((char)((float)speed/1.2), true);
             p_itsDCMotorLeft->run(speed, true);
+            Serial.println("The car is turning right forward!");
             break;
         //turn left forward is issued when the CID is 13 (0xD) (1101b)
         case 7:
             p_itsDCMotorRight->run(speed, true);
             p_itsDCMotorLeft->run((char)((float)speed/1.2), true);
+            Serial.println("The car is turning left forward!");
             break;
         //turn right backward    
         case 3:
             p_itsDCMotorRight ->run((char)((float)speed/1.2),false);
             p_itsDCMotorLeft ->run(speed,false);  
+            Serial.println("The car is turning right backward!");
+            break;
         //turn left backward
         case 1:
             p_itsDCMotorRight->run(speed,false);
             p_itsDCMotorLeft->run((char)((float)speed/1.2),false);
+            Serial.println("The car is turning left backward!");
+            break;
         //stop is issued when the CID is 14 (0xE) (1110b)
         case 5:
             p_itsDCMotorRight->stop();
             p_itsDCMotorLeft->stop();
+            Serial.println("The car is stopping!");
             break;
+        default:
+            Serial.println("The car cannot respond to the command!");
+
     }
 }
 
