@@ -384,7 +384,7 @@ void Tester::runTest(void){
     while(Serial.available() == 0);
 
     // Read the input from the Serial interface and store in a 'command' variable
-    char input = Serial.read();
+    unsigned char input = Serial.read();
     // Serial.print("Got a character: ");
     // Serial.print(input, DEC);
     // Serial.println();
@@ -404,8 +404,7 @@ void Tester::runTest(void){
         // Remember that the top-most bit is set to 1 for direction CID
         //char command = 0x80 | ((value << 4) & 0xF0);
         /* AH >> Here I made that so that the input values are still the same varying between 1 and 9 and I also changed their corresponding values in the CMot.cpp to be matching*/
-        char command = (value<<4) & 0xF0;
-
+        unsigned char command = (value<<4) & 0xF0;
 
         /* Change to the correct command required for the motion that we want to do */
         /* See CMOt for the correct command - translate from keyboard input to CID  
@@ -416,7 +415,9 @@ void Tester::runTest(void){
 
         // Get the interface to CMot from p_itsCTest and call the motionCommand() function passing 'command' as argument
         Serial.println("Sending motionCommand: ");
-        Serial.print(char(command), BIN);
+        Serial.print(command, BIN);
+        Serial.print(", ");
+        Serial.print(command, DEC);
         Serial.println();
         p_itsCTst->get_ItsIMot()->motionCommand(command);
     }

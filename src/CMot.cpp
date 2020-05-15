@@ -114,7 +114,7 @@ void Controller::set_ItsServo(Servo* arg){
     p_itsServo = arg;
 }
 
-int Controller::motionCommand(char arg){
+int Controller::motionCommand(unsigned char arg){
     // First is to breakdown the arg (message) into CID and speed
     // The lowest significant 4 bits are the speed information
     // The highest significant 4 bits are the command identifier itself

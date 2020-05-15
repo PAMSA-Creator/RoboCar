@@ -97,7 +97,7 @@ class Controller{
     void set_ItsServo(Servo* arg);
 
     // Actions
-    int motionCommand(char arg);
+    int motionCommand(unsigned char arg);
 };
 
 class DCMotor{
