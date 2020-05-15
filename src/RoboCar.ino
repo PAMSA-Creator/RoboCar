@@ -72,7 +72,7 @@ void loop(){
     static bool bLoop = false;
 
     // Test if it's the first time we enter the loop function
-    if(!bLoop) {
+    if(!bLoop) { //it means if bLoop is false
         // If first time then print something
         Serial.println("RoboTst::loop()");
         // Set bLoop to 'true' to avoid printing again at the next round

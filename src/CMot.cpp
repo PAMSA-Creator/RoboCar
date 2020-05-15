@@ -67,6 +67,8 @@ AMot::~AMot(){
 void AMot::init_AMot(){
     // TBD
     Serial.println("AMot::initAMot()");
+    return p_itsController -> init(); /*this is to assign the pins in the Arduino to the pins on the L293D 
+    for the right and left DCmotors*/
 }
 
 void AMot::set_ItsController(Controller* arg){
@@ -128,34 +130,44 @@ int Controller::motionCommand(char arg){
         case 8: 
             p_itsDCMotorRight->run(speed, true);
             p_itsDCMotorLeft->run(speed, true);
+            Serial.println ("The car is moving forward!");
             break;
         // Move backward is issued when the CID is 9 (0x9) (1001b)
-        case 9:
+        case 2:
             p_itsDCMotorRight->run(speed, false);
             p_itsDCMotorLeft->run(speed, false);
+            Serial.println("The car is moving backward!");
             break;
         // spin right is issued when the CID is 10 (0xA) (1010b)
-        case 10:
+        case 6:
             p_itsDCMotorRight->run(speed, false);
             p_itsDCMotorLeft->run(speed, true);
             break;
         // spin left is issued when the CID is 11 (0xB) (1011b)
-        case 11:
+        case 4:
             p_itsDCMotorRight->run(speed, true);
             p_itsDCMotorLeft->run(speed, false);
             break;
-        // turn right is issued when the CID is 12 (0xC) (1100b)
-        case 12:
+        // turn right forward is issued when the CID is 12 (0xC) (1100b)
+        case 9:
             p_itsDCMotorRight->run((char)((float)speed/1.2), true);
             p_itsDCMotorLeft->run(speed, true);
             break;
-        //turn left is issued when the CID is 13 (0xD) (1101b)
-        case 13:
+        //turn left forward is issued when the CID is 13 (0xD) (1101b)
+        case 7:
             p_itsDCMotorRight->run(speed, true);
             p_itsDCMotorLeft->run((char)((float)speed/1.2), true);
             break;
+        //turn right backward    
+        case 3:
+            p_itsDCMotorRight ->run((char)((float)speed/1.2),false);
+            p_itsDCMotorLeft ->run(speed,false);  
+        //turn left backward
+        case 1:
+            p_itsDCMotorRight->run(speed,false);
+            p_itsDCMotorLeft->run((char)((float)speed/1.2),false);
         //stop is issued when the CID is 14 (0xE) (1110b)
-        case 14:
+        case 5:
             p_itsDCMotorRight->stop();
             p_itsDCMotorLeft->stop();
             break;

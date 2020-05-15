@@ -374,8 +374,11 @@ void Tester::init(){
 }
  // Behaviour
 void Tester::runTest(void){
+
+    p_itsCTst->get_ItsIMot()->init();
+
     // The "byte" variable type can range from 0-255
-    Serial.println("Please Enter your command, you can enter values between 0 and 9!");
+    Serial.println("Please Enter your command, you can enter values between 1 and 9!");
     
     // Check for user input on the serial interface
     while(Serial.available() == 0);
@@ -389,28 +392,34 @@ void Tester::runTest(void){
     // Check that 'command' is between 0 and 9 only
     // Remember that we are dealing with ASCII code at this stage
     // ASCII code for '0' is 48 (0011 0000) and ASCII cde for '9' is 57 (0011 1001)
-    if((input >= '0') && (input <= '9')){
+    if((input >= '1') && (input <= '9')){
         // First we need to convert from the ASCII code to the correct command
         // 1. Get the decimal value of the character
         char value = input - '0';   /* Remember this trick */
-        // Serial.println("Converted to Decimal: ");
-        // Serial.print(value, DEC);
-        // Serial.println();
-
+       Serial.println("Converted to Decimal: ");
+       Serial.print(value,DEC);
+       Serial.println();
+                                     
         // 2. Set the correct direction
         // Remember that the top-most bit is set to 1 for direction CID
-        char command = 0x80 | ((value << 4) & 0xF0);
+        //char command = 0x80 | ((value << 4) & 0xF0);
+
+
+        char command = (value<<4) & 0xF0; /*here I made that so that the input values are still the same varying 
+        betwwen 1 and 9 and I also changed their corresponding values in the CMot.cpp to be matching*/
+
 
         /* Change to the correct command required for the motion that we want to do */
-        /* See CMOt for the correct command - translate from keyboard input to CID */
+        /* See CMOt for the correct command - translate from keyboard input to CID  
+        for ex. 2 on the keyboard is opposed to 9 in the system*/
 
         // 3. Set the correct speed
         command |= 0x08;
 
         // Get the interface to CMot from p_itsCTest and call the motionCommand() function passing 'command' as argument
-        // Serial.println("Sending motionCommand: ");
-        // Serial.print(char(command), BIN);
-        // Serial.println();
+        Serial.println("Sending motionCommand: ");
+        Serial.print(char(command), BIN);
+        Serial.println();
         p_itsCTst->get_ItsIMot()->motionCommand(command);
     }
     else {
