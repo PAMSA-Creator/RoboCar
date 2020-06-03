@@ -14,8 +14,8 @@
 #include "PkgRoboTest.h"
 
 #define _CMAN_EMU   true
-#define _CCOM_EMU   true
-#define _CMOT_EMU   false
+#define _CCOM_EMU   true    // Set to false for ASSIGNMENT 2
+#define _CMOT_EMU   false   // Set to false for ASSIGNMENT 1
 #define _CSEN_EMU   true
 
 RoboTest::RoboTest(){ //RoboTest() is the package constructor,(N.B.the constructor is always named after the class name)
@@ -155,7 +155,7 @@ void RoboTest::run(){
         bRun = true;
     }
     /*FIRST ASSIGNMENT:    Set the wheels in motion
-    Create a runTest() function in the Tester class (CTst) that will read an input from the keyboard and send the command to a Controller class (CMot).
+    Create a runATest() function in the Tester class (CTst) that will read an input from the keyboard and send the command to a Controller class (CMot).
 
     Authorised keyboard inputs are all numerical single digit characters (0,1,2,3,4,5,6,7,8,9).
     To pass the information between components you must use the interfaces.
@@ -166,6 +166,26 @@ void RoboTest::run(){
     p_itsComponent->get_ItsInterface()->functionCall();
     example: p_itsCTst->get_ItsITst()->init();*/
 
-    // Call the runTest() function from ITst, the CTst interface
+    // Call the runATest() function with argument "Mot" from ITst, the CTst interface
     p_itsCTst->get_ItsITst()->runATest();
+
+    /*SECOND ASSIGNMENT:    Check the communication interface
+    Call the runATest function that we used previously in assignment 1.
+    First change the function to take a string parameter "Mot" or "Com" so on and so forth to run the correct test.
+    will confirm the data received on the communication interface by displaying the value on a screen (e.g. terminal or LCD).
+
+    The function will present the raw data received to the display.
+    It will also indicate the time between each stream received.
+    HINT: research how to read time from Arduino, use newtime and oldtime to calculate the duration between each input.
+    This is to check the frequency at which information can be sent via the Communication interface.
+    For example how quickly can we press multiple commands before one or more gets droped.
+
+    The receive command will need to be triggered by an interrupt to avoid the whole system to hang waiting for an input.
+    This can be done last after confirming the hardware works properly.
+
+    Remember to enable the CCom component and disable all other to use their emulators.
+    */
+
+   // Call the test function with argument "Com"
+   p_itsCTst->get_ItsITst()->runATest();
 }

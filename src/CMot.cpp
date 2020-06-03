@@ -182,7 +182,6 @@ int Controller::motionCommand(unsigned char arg){
             break;
         default:
             Serial.println("The car cannot respond to the command!");
-
     }
 }
 

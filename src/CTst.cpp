@@ -195,7 +195,11 @@ void ATst::init(){
 //Behaviour
 void ATst::runATest(){
     Serial.println ("runATest is being executed");
-    p_itsTester->runTest();
+    // Use a swicth case statement to check which test to runATest
+    // Case "Mot"
+    p_itsTester->runMotTest();
+    // Case "Com"
+    //p_itsTester->runComTest();
 }
 
 /* --------------------- ATstMan ------------------------- */
@@ -373,7 +377,7 @@ void Tester::init(){
     this->init_Tester();
 }
  // Behaviour
-void Tester::runTest(void){
+void Tester::runMotTest(void){
 
     p_itsCTst->get_ItsIMot()->init();
 
@@ -424,4 +428,10 @@ void Tester::runTest(void){
     else {
         Serial.println ("That's an invalid value!");
     }
+}
+
+void Tester::runComTest(void){
+    // Initial test should be simple, e.g. turn on an LED when any string has been received on the Bluetooth (Com) interface.
+    // Then gradually increase the complexity by checking specific commands.
+    // Record the time event and measure duration between messages.
 }

@@ -217,7 +217,8 @@ class Tester{
     void init();
 
     // Behaviour
-    void runTest(void);
+    void runMotTest(void);
+    void runComTest(void);
 };
 
 #endif
