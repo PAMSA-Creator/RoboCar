@@ -193,13 +193,29 @@ void ATst::init(){
     this->init_ATst();
 }
 //Behaviour
-void ATst::runATest(){
+void ATst::runATest(const char* subsystem){ //const char* is casting the string so that we can pass the string arguments between ""
     Serial.println ("runATest is being executed");
     // Use a swicth case statement to check which test to runATest
-    // Case "Mot"
+    switch (subsystem){
+    case "Mot":
     p_itsTester->runMotTest();
-    // Case "Com"
-    //p_itsTester->runComTest();
+    break;
+
+    case "Com":
+    p_itsTester->runComTest();
+    break;
+
+    case "Man":
+    p_itsTester->runManTest();
+    break;
+
+    case "Sen":
+    p_itsTester->runSenTest();
+    break;
+
+    default:
+    Serial.println("You have to choose which subsystem you want to test?");
+    }
 }
 
 /* --------------------- ATstMan ------------------------- */
@@ -432,6 +448,8 @@ void Tester::runMotTest(void){
 
 void Tester::runComTest(void){
     // Initial test should be simple, e.g. turn on an LED when any string has been received on the Bluetooth (Com) interface.
+
     // Then gradually increase the complexity by checking specific commands.
+    
     // Record the time event and measure duration between messages.
 }

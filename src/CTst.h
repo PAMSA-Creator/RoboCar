@@ -101,7 +101,7 @@ class ATst:public ITst{
     void init();  //public initialisation (the interface initialisation ITst)
 
     // Behaviour
-    void runATest();
+    void runAtest (const char* subsystem);
 };
 
 class ATstMan:public IMan{ //the ":" operator is for inheritance (i.e ATstMan inherites publicly from IMan)
@@ -195,7 +195,7 @@ class ATstSen:public ISen{
 
 /*
     Tester class
-    The Tester class implements the logic behind each emulated coponent.
+    The Tester class implements the logic behind each emulated component.
 */
 class Tester{
     private:
@@ -217,6 +217,7 @@ class Tester{
     void init();
 
     // Behaviour
+    
     void runMotTest(void);
     void runComTest(void);
 };

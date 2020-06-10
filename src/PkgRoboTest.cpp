@@ -167,7 +167,7 @@ void RoboTest::run(){
     example: p_itsCTst->get_ItsITst()->init();*/
 
     // Call the runATest() function with argument "Mot" from ITst, the CTst interface
-    p_itsCTst->get_ItsITst()->runATest();
+    p_itsCTst->get_ItsITst()->runATest("Mot");
 
     /*SECOND ASSIGNMENT:    Check the communication interface
     Call the runATest function that we used previously in assignment 1.
@@ -187,5 +187,5 @@ void RoboTest::run(){
     */
 
    // Call the test function with argument "Com"
-   p_itsCTst->get_ItsITst()->runATest();
+   p_itsCTst->get_ItsITst()->runATest("Com");
 }
