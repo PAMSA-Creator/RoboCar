@@ -101,7 +101,7 @@ class ATst:public ITst{
     void init();  //public initialisation (the interface initialisation ITst)
 
     // Behaviour
-    void runAtest (const char* subsystem);
+    void runAtest (char* subsystem);
 };
 
 class ATstMan:public IMan{ //the ":" operator is for inheritance (i.e ATstMan inherites publicly from IMan)

@@ -112,19 +112,19 @@ int RoboTest::init(){
     #if(false == _CCOM_EMU)
     p_itsCMan->set_ItsICom(p_itsCCom->get_ItsICom());       // Real Icom
     #else
-    p_itsCMan->set_ItsICom(p_itsCTst->get_ItsICom());    // Emulated Icom
+    p_itsCMan->set_ItsICom(p_itsCTst->get_ItsICom());       // Emulated Icom
     #endif
 
     #if(false == _CMOT_EMU)
     p_itsCMan->set_ItsIMot(p_itsCMot->get_ItsIMot());       // Real IMot
     #else
-    p_itsCMan->set_ItsIMot(p_itsCTst->get_ItsIMot());    // Emulated IMot
+    p_itsCMan->set_ItsIMot(p_itsCTst->get_ItsIMot());       // Emulated IMot
     #endif
 
     #if(false == _CSEN_EMU)
     p_itsCMan->set_ItsISen(p_itsCSen->get_ItsISen());       // Real ISen
     #else
-    p_itsCMan->set_ItsISen(p_itsCTst->get_ItsISen());    // Emulated ISen
+    p_itsCMan->set_ItsISen(p_itsCTst->get_ItsISen());       // Emulated ISen
     #endif
 #endif
 

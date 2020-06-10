@@ -193,7 +193,7 @@ void ATst::init(){
     this->init_ATst();
 }
 //Behaviour
-void ATst::runATest(const char* subsystem){ //const char* is casting the string so that we can pass the string arguments between ""
+void ATst::runATest(char* subsystem){ //const char* is casting the string so that we can pass the string arguments between ""
     Serial.println ("runATest is being executed");
     // Use a swicth case statement to check which test to runATest
     switch (subsystem){
