@@ -193,10 +193,37 @@ void ATst::init(){
     this->init_ATst();
 }
 //Behaviour
-void ATst::runATest(char* subsystem){ //const char* is casting the string so that we can pass the string arguments between ""
+void ATst::runATest(char* subsystem){ //Char pointer allocates much smaller bytes in memory than the string class variables
+   char* subsystem; 
+   int i=0; //initialising the index of the array to store the incoming characters of the string
     Serial.println ("runATest is being executed");
+    while (!Serial.available());
+    delay(100); //wait to recieve the characters on the serial bus
+    while(Serial.available() > 0) // check how many characters to read
+  {
+    subsystem[i] = Serial.read(); // Add the incoming byte to the array
+    i++; // Ensure the next byte is added in the next position
+    subsystem[i] = '\0'; // to null terminate the incoming string
+  }
+Serial.print("The subsystem you've chosen is:");
+Serial.println(subsystem); //confirm the recieved data
+    if (subsystem == "Mot"){
+        p_itsTester-> runMotTest();
+    }
+    else if (subsystem == "Com"){
+        p_itsTester-> runComTest();
+    }
+    else if (subsystem == "Sen"){
+        p_itsTester->runSenTest();
+    }
+    else if (subsystem == "Man"){
+        p_itsTester->runManTest();
+    }
+    else{
+        Serial.println("You have to choose which subsystem you want to test?")
+    }
     // Use a swicth case statement to check which test to runATest
-    switch (subsystem){
+    /*switch (subsystem){
     case "Mot":
     p_itsTester->runMotTest();
     break;
@@ -215,7 +242,7 @@ void ATst::runATest(char* subsystem){ //const char* is casting the string so tha
 
     default:
     Serial.println("You have to choose which subsystem you want to test?");
-    }
+    }*/
 }
 
 /* --------------------- ATstMan ------------------------- */
@@ -448,6 +475,7 @@ void Tester::runMotTest(void){
 
 void Tester::runComTest(void){
     // Initial test should be simple, e.g. turn on an LED when any string has been received on the Bluetooth (Com) interface.
+
 
     // Then gradually increase the complexity by checking specific commands.
     
