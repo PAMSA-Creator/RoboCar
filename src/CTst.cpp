@@ -194,37 +194,40 @@ void ATst::init(){
 }
 //Behaviour
 void ATst::runATest(char* arg){
-    Serial.println ("runATest is being executed");
-    while (!Serial.available());
-    delay(100); //wait to recieve the characters on the serial bus
-    while(Serial.available() > 0) // check how many characters to read
-  {
-    subsystem[i] = Serial.read(); // Add the incoming byte to the array
-    i++; // Ensure the next byte is added in the next position
-    subsystem[i] = '\0'; // to null terminate the incoming string
-  }
-Serial.print("The subsystem you've chosen is:");
-Serial.println(subsystem); //confirm the recieved data
-    if (subsystem == "Mot"){
-        p_itsTester-> runMotTest();
-    }
-    else if (subsystem == "Com"){
-        p_itsTester-> runComTest();
-    }
-    else if (subsystem == "Sen"){
-        p_itsTester->runSenTest();
-    }
-    else if (subsystem == "Man"){
-        p_itsTester->runManTest();
-    }
-    else{
-        Serial.println("You have to choose which subsystem you want to test?")
-    }
-    // Use a swicth case statement to check which test to runATest
-    if("Mot" == arg) p_itsTester->runMotTest();
-    else if("Com" == arg) p_itsTester->runComTest();
-    else if("Man" == arg) p_itsTester->runManTest();
-    else if("Sen" == arg) p_itsTester->runSenTest();
+//     Serial.println ("runATest is being executed");
+//     while (!Serial.available());
+//     delay(100); //wait to recieve the characters on the serial bus
+//     while(Serial.available() > 0) // check how many characters to read
+//   {
+//     subsystem[i] = Serial.read(); // Add the incoming byte to the array
+//     i++; // Ensure the next byte is added in the next position
+//     subsystem[i] = '\0'; // to null terminate the incoming string
+//   }
+// Serial.print("The subsystem you've chosen is:");
+// Serial.println(subsystem); //confirm the recieved data
+//     if (subsystem == "Mot"){
+//         p_itsTester-> runMotTest();
+//     }
+//     else if (subsystem == "Com"){
+//         p_itsTester-> runComTest();
+//     }
+//     else if (subsystem == "Sen"){
+//         p_itsTester->runSenTest();
+//     }
+//     else if (subsystem == "Man"){
+//         p_itsTester->runManTest();
+//     }
+//     else{
+//         Serial.println("You have to choose which subsystem you want to test?")
+//     }
+
+    // Check which test to runATest
+    // Use strcmp to compare the argument arg passed to the method and the word associated with the test
+    // strcmp returns the lenght of the string
+    if(0 == strcmp("Mot", arg)) p_itsTester->runMotTest();
+    else if(0 == strcmp("Com", arg)) p_itsTester->runComTest();
+    else if(0 == strcmp("Man", arg)) p_itsTester->runManTest();
+    else if(0 == strcmp("Sen", arg)) p_itsTester->runSenTest();
     else Serial.println("You have to choose which subsystem you want to test?");
 }
 
@@ -458,14 +461,18 @@ void Tester::runMotTest(void){
 }
 
 void Tester::runComTest(void){
+    Serial.println("Tester::runComTest");
 
     // Initialise the CCom component
     p_itsCTst->get_ItsICom()->init();
 
+    // For debug purposes wait for something to happen on the serial port.
+    // Remove this once the function is fully implemented
+    while(!Serial.available());
+    Serial.read();
+
     // Initial test should be simple, e.g. turn on an LED when any string has been received on the Bluetooth (Com) interface.
     // First, wait for an input on the Bluetooth module
-    
-
 
     // Then gradually increase the complexity by checking specific commands.
     

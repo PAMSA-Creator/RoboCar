@@ -14,13 +14,14 @@
 #include "PkgRoboTest.h"
 
 #define _CMAN_EMU   true
-#define _CCOM_EMU   true    // Set to false for ASSIGNMENT 2
-#define _CMOT_EMU   false   // Set to false for ASSIGNMENT 1
+#define _CCOM_EMU   false    // Set to false for ASSIGNMENT 2
+#define _CMOT_EMU   true   // Set to false for ASSIGNMENT 1
 #define _CSEN_EMU   true
 
 RoboTest::RoboTest(){ //RoboTest() is the package constructor,(N.B.the constructor is always named after the class name)
     // The test component always gets created
     p_itsCTst = new(CTst);
+    itsTestToRun = new char[4];
 
     // All other components are either instanciated as normal or emulated by CTst
 #if (false == _CMAN_EMU) /* "#if()" that's called a preprocessor if and it's only preprocessed at the first step of 
@@ -29,9 +30,11 @@ compiling the program, whereas the normal if(){}, is handeled at run time when t
 #endif
 #if (false == _CCOM_EMU)
     p_itsCCom = new(CCom);
+    itsTestToRun = "Com";
 #endif
 #if (false == _CMOT_EMU)
     p_itsCMot = new(CMot);
+    itsTestToRun = "Mot";
 #endif
 #if (false == _CSEN_EMU)
     p_itsCSen = new(CSen);
@@ -40,6 +43,7 @@ compiling the program, whereas the normal if(){}, is handeled at run time when t
 
 RoboTest::~RoboTest(){
     delete(p_itsCTst);
+    delete(itsTestToRun);
 #if (false == _CMAN_EMU)
     delete(p_itsCMan);
 #endif
@@ -167,7 +171,7 @@ void RoboTest::run(){
     example: p_itsCTst->get_ItsITst()->init();*/
 
     // Call the runATest() function with argument "Mot" from ITst, the CTst interface
-    p_itsCTst->get_ItsITst()->runATest("Mot");
+    //p_itsCTst->get_ItsITst()->runATest("Mot");
 
     /*SECOND ASSIGNMENT:    Check the communication interface
     Call the runATest function that we used previously in assignment 1.
@@ -186,6 +190,9 @@ void RoboTest::run(){
     Remember to enable the CCom component and disable all other to use their emulators.
     */
 
-   // Call the test function with argument "Com"
-   p_itsCTst->get_ItsITst()->runATest("Com");
+    // Call the test function with argument testToRun set to "Com" (remember to set it in the CTest constructor)
+    Serial.print("Test to be run: ");
+    Serial.println(itsTestToRun);
+    p_itsCTst->get_ItsITst()->runATest(itsTestToRun);
+    //p_itsCTst->get_ItsITst()->runATest("Com");
 }
