@@ -193,9 +193,7 @@ void ATst::init(){
     this->init_ATst();
 }
 //Behaviour
-void ATst::runATest(char* subsystem){ //Char pointer allocates much smaller bytes in memory than the string class variables
-   char* subsystem; 
-   int i=0; //initialising the index of the array to store the incoming characters of the string
+void ATst::runATest(char* arg){
     Serial.println ("runATest is being executed");
     while (!Serial.available());
     delay(100); //wait to recieve the characters on the serial bus
@@ -223,26 +221,11 @@ Serial.println(subsystem); //confirm the recieved data
         Serial.println("You have to choose which subsystem you want to test?")
     }
     // Use a swicth case statement to check which test to runATest
-    /*switch (subsystem){
-    case "Mot":
-    p_itsTester->runMotTest();
-    break;
-
-    case "Com":
-    p_itsTester->runComTest();
-    break;
-
-    case "Man":
-    p_itsTester->runManTest();
-    break;
-
-    case "Sen":
-    p_itsTester->runSenTest();
-    break;
-
-    default:
-    Serial.println("You have to choose which subsystem you want to test?");
-    }*/
+    if("Mot" == arg) p_itsTester->runMotTest();
+    else if("Com" == arg) p_itsTester->runComTest();
+    else if("Man" == arg) p_itsTester->runManTest();
+    else if("Sen" == arg) p_itsTester->runSenTest();
+    else Serial.println("You have to choose which subsystem you want to test?");
 }
 
 /* --------------------- ATstMan ------------------------- */
@@ -422,6 +405,7 @@ void Tester::init(){
  // Behaviour
 void Tester::runMotTest(void){
 
+    // Initialise the CMot component
     p_itsCTst->get_ItsIMot()->init();
 
     // The "byte" variable type can range from 0-255
@@ -474,10 +458,24 @@ void Tester::runMotTest(void){
 }
 
 void Tester::runComTest(void){
+
+    // Initialise the CCom component
+    p_itsCTst->get_ItsICom()->init();
+
     // Initial test should be simple, e.g. turn on an LED when any string has been received on the Bluetooth (Com) interface.
+    // First, wait for an input on the Bluetooth module
+    
 
 
     // Then gradually increase the complexity by checking specific commands.
     
     // Record the time event and measure duration between messages.
+}
+
+void Tester::runManTest(void){
+    // TBD
+}
+
+void Tester::runSenTest(void){
+    // TBD
 }

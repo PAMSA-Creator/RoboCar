@@ -120,9 +120,9 @@ TBD
 */
 void Bluetooth::init_Bluetooth(){
     if(!Serial){
-        Serial.begin(115200);
+        Serial.begin(9600);
     }
-        Serial.println("Bluetooth::init_Bluetooth()");
+    Serial.println("Bluetooth::init_Bluetooth()");
 }
 
 /*

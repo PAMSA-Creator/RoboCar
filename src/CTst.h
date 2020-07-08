@@ -77,7 +77,7 @@ class CTst{
 class ITst{
     public:
     virtual void init();
-    virtual void runATest();
+    virtual void runATest(char* arg);
 };
 
 /* Adapter class */
@@ -101,7 +101,7 @@ class ATst:public ITst{
     void init();  //public initialisation (the interface initialisation ITst)
 
     // Behaviour
-    void runAtest (char* subsystem);
+    void runATest(char* arg);
 };
 
 class ATstMan:public IMan{ //the ":" operator is for inheritance (i.e ATstMan inherites publicly from IMan)
@@ -220,6 +220,8 @@ class Tester{
     
     void runMotTest(void);
     void runComTest(void);
+    void runManTest(void);
+    void runSenTest(void);
 };
 
 #endif

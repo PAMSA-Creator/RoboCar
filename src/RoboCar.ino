@@ -55,14 +55,19 @@ RoboTest myRoboTest;
 byte status = 0;
 
 void setup(){
+
     // First we setup and open the serial port
-    Serial.begin(9600);
-    // Check if Serial is ready
+    Serial.begin(115200);
+
+    // Wait for Serial to be ready
     while (!Serial);
+
     // When ready, print something to inform us where we are
     Serial.println("RoboTst::setup()");
+
     // Run the initialisation function
 	status = myRoboTest.init();
+
     // Check for status message and if error is reporting, flag it up
     if(0 != status) Serial.println("Error initialising myRoboTst");
 }
@@ -73,11 +78,14 @@ void loop(){
 
     // Test if it's the first time we enter the loop function
     if(!bLoop) { //it means if bLoop is false
+
         // If first time then print something
         Serial.println("RoboTst::loop()");
+
         // Set bLoop to 'true' to avoid printing again at the next round
         bLoop = true;
     }
+
     // Execute the run function
     myRoboTest.run();
 }
