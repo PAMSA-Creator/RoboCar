@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:uno",
+    "programmer": "AVRISP mkII",
+    "port": "COM4",
+    "sketch": "RoboCar.ino"
+}

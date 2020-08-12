@@ -16,6 +16,7 @@
 #define _C_COM_H
 
 #include <Arduino.h>
+#include <SoftwareSerial.h> 
 
 class CCom;
 class ICom;
@@ -30,7 +31,6 @@ class CCom{
     ACom* p_itsACom = NULL;             // CCom adapter (ACom)
     IMan* p_itsIMan = NULL;             // CMan port
     Bluetooth* p_itsBluetooth = NULL;   // Bluetooth object
-
     public:
     // Default constructor & destructor
     CCom();
@@ -52,6 +52,7 @@ class ICom{
     public:
     virtual void init();
     virtual void println(const char* arg);
+    virtual void BTControlLED();
 };
 
 /* Adapter class */
@@ -76,13 +77,14 @@ class ACom : public ICom{
 
     // Behaviour
     void println(const char* arg);
+    void BTControlLED();
 };
 
 /* Class Bluetooth */
 class Bluetooth{
     private:
     void init_Bluetooth();
-
+    SoftwareSerial* p_HC05 = NULL;
     public:
     // Default constructor & destructor
     Bluetooth();
@@ -95,6 +97,7 @@ class Bluetooth{
 
     // Behaviour
     void println(const char* arg);
+    void BTControlLED();
 };
 
 #endif

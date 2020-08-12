@@ -27,6 +27,7 @@ RoboTest::RoboTest(){ //RoboTest() is the package constructor,(N.B.the construct
 #if (false == _CMAN_EMU) /* "#if()" that's called a preprocessor if and it's only preprocessed at the first step of 
 compiling the program, whereas the normal if(){}, is handeled at run time when the program is executed.*/
     p_itsCMan = new(CMan);
+    itsTestToRun = "Man";
 #endif
 #if (false == _CCOM_EMU)
     p_itsCCom = new(CCom);
@@ -38,6 +39,7 @@ compiling the program, whereas the normal if(){}, is handeled at run time when t
 #endif
 #if (false == _CSEN_EMU)
     p_itsCSen = new(CSen);
+    itsTestToRun = "Sen";
 #endif
 }
 
@@ -140,7 +142,7 @@ int RoboTest::init(){
     p_itsCMan->init();
 #endif
 #if (false == _CCOM_EMU)
-    p_itsCCom->init();
+    p_itsCCom->init(); //look at line 45 in CCom.cpp
 #endif
 #if (false == _CMOT_EMU)
     p_itsCMot->init();

@@ -1,0 +1,40 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Program Files (x86)\\Arduino\\tools\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**"
+            ],
+            "forcedInclude": [
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+            ],
+            "intelliSenseMode": "msvc-x64"
+        },
+        {
+            "name": "Arduino_Win",
+            "includePath": [
+                "${workspaceFolder}\\**",
+                "${workspaceFolder}\\src\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\SoftwareSerial\\src",
+                "C:\\Program Files (x86)\\Arduino\\libraries",
+                "C:\\Users\\Afnan\\Documents\\Arduino\\libraries"
+            ],
+            "defines": [
+                "ARDUINO",
+                "ARDUINO_AVR_UNO",
+                "ARDUINO_ARCH_AVR",
+                "USBCON"
+            ],
+            "forcedInclude": [
+                "C:\\\\Program Files (x86)\\\\Arduino\\\\hardware\\\\arduino\\\\avr\\\\cores\\\\arduino\\\\Arduino.h",
+                "C:\\\\Program Files (x86)\\\\Arduino\\\\hardware\\\\arduino\\\\avr\\\\libraries\\\\SoftwareSerial\\\\src\\\\SoftwareSerial.h"
+            ],
+            "intelliSenseMode": "msvc-x64"
+        }
+    ],
+    "version": 4
+}

@@ -59,7 +59,7 @@ void setup(){
     // First we setup and open the serial port
     Serial.begin(115200);
 
-    // Wait for Serial to be ready
+    // Wait for Serial to be ready (do nothing)
     while (!Serial);
 
     // When ready, print something to inform us where we are

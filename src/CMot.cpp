@@ -80,7 +80,7 @@ void AMot::init(){
 }
 
 int AMot::motionCommand(char arg){
-    // Call the function from the Controller object
+    // Call the function from the Controller class
     return p_itsController->motionCommand(arg);
 }
 

@@ -31,7 +31,7 @@ ICom* CCom::get_ItsICom(){
 
 /*
 Setter: set_ItsIMan
-Pass a valid IMan point to local variable p_itsIMan or nullify
+Pass a valid IMan pointer to local variable p_itsIMan or nullify
 */
 void CCom::set_ItsIMan(IMan* arg){
     p_itsIMan = (NULL != arg) ? arg : NULL;
@@ -85,6 +85,7 @@ Initialise ACom
 */
 void ACom::init_ACom(){
     Serial.println("ACom::init_ACom()");
+    return p_itsBluetooth -> init();
 }
 
 void ACom::init(){
@@ -98,30 +99,45 @@ void ACom::println(const char* arg){
     if(NULL != p_itsBluetooth) p_itsBluetooth->println(arg);
     // !!! Need to catch exception !!!
 }
-
+void ACom:: BTControlLED(){
+    //call the function from the Bluetooth class
+   return p_itsBluetooth -> BTControlLED();
+}
 
 /* --------------------- Bluetooth ------------------------- */
 /*
 TBD
 */
 Bluetooth::Bluetooth(){
-    // TBD
+//TBD
+#define _HC05
+#ifdef _HC05 
+    p_HC05 = new SoftwareSerial(3,2); // 3,2 are the Rx and Tx pins in arduino UNO respectively
+#endif
 }
 
 /*
 TBD
 */
 Bluetooth::~Bluetooth(){
-    // TBD
+    delete p_HC05;
 }
 
 /*
 TBD
 */
 void Bluetooth::init_Bluetooth(){
+    
     if(!Serial){
-        Serial.begin(9600);
     }
+    #define _HC05
+    #ifdef _HC05
+    //I've included SoftwareSerial.h library in the CCom.h
+  // p_HC05 = new SoftwareSerial(3,2); // 3,2 are the Rx and Tx pins in arduino UNO respectively
+    if (p_HC05 !=NULL){
+        p_HC05-> begin (9600);
+    }
+    #endif
     Serial.println("Bluetooth::init_Bluetooth()");
 }
 
@@ -137,4 +153,33 @@ TBD
 */
 void Bluetooth::println(const char* arg){
     Serial.println(arg);
+}
+
+void Bluetooth :: BTControlLED(){
+    char state = 'x';
+    int LED = 13;
+    pinMode (LED,OUTPUT);
+ #define _HC05
+ #ifdef _HC05 
+ if (p_HC05->available ()){
+   state = p_HC05->read ();
+   Serial.println("Reading the serial BT");
+  }
+  #else 
+  state = ('0' == state ) ? '1':'0' ; // This line is to toggle the state between 0 and 1 values
+  #endif
+
+if (state == '0'){
+  digitalWrite (LED,LOW);
+  #ifdef _DEBUG
+  Serial.println ("LED is OFF!");
+  #endif
+}
+
+else if (state == '1'){
+  digitalWrite (LED,HIGH);
+  #ifdef _DEBUG
+  Serial.println ("LED is ON!");}
+  #endif
+  
 }

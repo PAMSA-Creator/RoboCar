@@ -470,10 +470,9 @@ void Tester::runComTest(void){
     // Remove this once the function is fully implemented
     while(!Serial.available());
     Serial.read();
-
     // Initial test should be simple, e.g. turn on an LED when any string has been received on the Bluetooth (Com) interface.
     // First, wait for an input on the Bluetooth module
-
+    p_itsCTst ->get_ItsICom()-> BTControlLED();
     // Then gradually increase the complexity by checking specific commands.
     
     // Record the time event and measure duration between messages.
@@ -484,5 +483,5 @@ void Tester::runManTest(void){
 }
 
 void Tester::runSenTest(void){
-    // TBD
+    // TBD 
 }
