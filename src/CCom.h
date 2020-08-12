@@ -83,6 +83,8 @@ class ACom : public ICom{
 /* Class Bluetooth */
 // Use the following #define to select the type of Bluetooth hardware controller
 #define _HC05   // For HC05 controller
+//#define _BT05   // for BT05 controller
+//#define _HM10   // for HM10 controller
 
  class Bluetooth{
     private:
