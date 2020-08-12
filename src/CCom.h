@@ -81,7 +81,10 @@ class ACom : public ICom{
 };
 
 /* Class Bluetooth */
-class Bluetooth{
+// Use the following #define to select the type of Bluetooth hardware controller
+#define _HC05   // For HC05 controller
+
+ class Bluetooth{
     private:
     void init_Bluetooth();
     SoftwareSerial* p_HC05 = NULL;

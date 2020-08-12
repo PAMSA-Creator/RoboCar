@@ -85,7 +85,7 @@ Initialise ACom
 */
 void ACom::init_ACom(){
     Serial.println("ACom::init_ACom()");
-    return p_itsBluetooth -> init();
+    return p_itsBluetooth->init();
 }
 
 void ACom::init(){
@@ -99,9 +99,10 @@ void ACom::println(const char* arg){
     if(NULL != p_itsBluetooth) p_itsBluetooth->println(arg);
     // !!! Need to catch exception !!!
 }
-void ACom:: BTControlLED(){
+
+void ACom::BTControlLED(){
     //call the function from the Bluetooth class
-   return p_itsBluetooth -> BTControlLED();
+   return p_itsBluetooth->BTControlLED();
 }
 
 /* --------------------- Bluetooth ------------------------- */
@@ -112,7 +113,7 @@ Bluetooth::Bluetooth(){
 //TBD
 #define _HC05
 #ifdef _HC05 
-    p_HC05 = new SoftwareSerial(3,2); // 3,2 are the Rx and Tx pins in arduino UNO respectively
+    p_HC05 = new SoftwareSerial(3, 2); // 3,2 are the Rx and Tx pins in arduino UNO respectively
 #endif
 }
 
@@ -155,31 +156,30 @@ void Bluetooth::println(const char* arg){
     Serial.println(arg);
 }
 
-void Bluetooth :: BTControlLED(){
+void Bluetooth::BTControlLED(){
+    // Local variables
     char state = 'x';
     int LED = 13;
     pinMode (LED,OUTPUT);
- #define _HC05
+
  #ifdef _HC05 
- if (p_HC05->available ()){
-   state = p_HC05->read ();
-   Serial.println("Reading the serial BT");
-  }
-  #else 
-  state = ('0' == state ) ? '1':'0' ; // This line is to toggle the state between 0 and 1 values
-  #endif
+    if (p_HC05->available()){
+        state = p_HC05->read ();
+        Serial.println("Reading the serial BT");
+    }
+#else 
+    state = ('0' == state ) ? '1' : '0'; // This line is to toggle the state between 0 and 1 values
+#endif
 
-if (state == '0'){
-  digitalWrite (LED,LOW);
-  #ifdef _DEBUG
-  Serial.println ("LED is OFF!");
-  #endif
-}
-
-else if (state == '1'){
-  digitalWrite (LED,HIGH);
-  #ifdef _DEBUG
-  Serial.println ("LED is ON!");}
-  #endif
-  
+    if (state == '0'){
+        digitalWrite (LED, LOW);
+        Serial.println ("LED is OFF!");
+    }
+    else if (state == '1'){
+        digitalWrite (LED, HIGH);
+        Serial.println ("LED is ON!");
+    }
+    else{
+        Serial.println ("!!! NOT POSSIBLE !!!");
+    }
 }

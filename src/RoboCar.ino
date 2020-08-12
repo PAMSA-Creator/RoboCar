@@ -17,6 +17,7 @@
 !!! Builds start here               !!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
+
 // Check is _RELEASE_BUILD was defined
 // If _RELEASE_BUILD has been defined, let's build it.
 #if defined( _RELEASE_BUILD )
@@ -55,7 +56,6 @@ RoboTest myRoboTest;
 byte status = 0;
 
 void setup(){
-
     // First we setup and open the serial port
     Serial.begin(115200);
 
