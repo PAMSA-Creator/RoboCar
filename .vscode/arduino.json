@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:uno",
     "sketch": "src/RoboCar.ino",
-    "programmer": "AVR ISP",
+    "programmer": "AVRISP mkII",
     "port": "/dev/ttyUSB0"
 }

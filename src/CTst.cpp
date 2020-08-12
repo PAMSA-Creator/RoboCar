@@ -193,7 +193,7 @@ void ATst::init(){
     this->init_ATst();
 }
 //Behaviour
-void ATst::runATest(char* arg){
+void ATst::runATest(const char* arg){
 //     Serial.println ("runATest is being executed");
 //     while (!Serial.available());
 //     delay(100); //wait to recieve the characters on the serial bus
