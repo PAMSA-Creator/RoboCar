@@ -5,12 +5,21 @@
         "arduino.tools.include.path": "${env:arduino.path}/hardware/tools/avr",
         "arduino.avr.compiler.path": "${env:arduino.path}/hardware/tools/avr/bin/avr-gcc",
         "arduino.libraries.path": "${env:arduino.path}/libraries",
+        "user.home": "${HOME}",
+        "win.arduino.path": "C:\\Program Files (x86)\\Arduino\\",
+        "win.arduino.avr.include.path": "${env:win.arduino.path}\\hardware\\arduino\\avr",
+        "win.arduino.tools.include.path": "${env:win.arduino.path}\\hardware\\tools",
+        "win.arduino.libraries.path": "${env:win.arduino.path}\\libraries",
+        "win.user.home": "${HOME}",
+        "win.arduino.user.path": "${env:win.user.home}\\OneDrive\\Documents\\Arduino",
         "dummy-last-line": "To allow the second to last line (e.g. the real last line) to always end with a comma"
     },
     "configurations": [
         {
             "name": "Win32",
             "includePath": [
+                "C:\\Program Files (x86)\\Arduino\\tools\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
                 "${workspaceFolder}/**"
             ],
             "defines": [
@@ -22,7 +31,10 @@
             "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.21.27702/bin/Hostx64/x64/cl.exe",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "msvc-x64"
+            "intelliSenseMode": "msvc-x64",
+            "forcedInclude": [
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+            ]
         },
         {
             "name": "Arduino_Win",
@@ -31,10 +43,10 @@
                     "${workspaceFolder}\\**",
                     "${workspaceFolder}\\src\\**",
                     "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
-                    "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
                     "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
                     "C:\\Program Files (x86)\\Arduino\\libraries",
-                    "C:\\Users\\vvill\\OneDrive\\Documents\\Arduino\\libraries"
+                    "C:\\users\\vvill\\OneDrive\\Documents\\Arduino\\libraries"
                 ],
                 "limitSymbolsToIncludedHeaders": true
             },
@@ -42,10 +54,10 @@
                 "${workspaceFolder}\\**",
                 "${workspaceFolder}\\src\\**",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
                 "C:\\Program Files (x86)\\Arduino\\libraries",
-                "C:\\Users\\vvill\\OneDrive\\Documents\\Arduino\\libraries"
+                "C:\\users\\vvill\\OneDrive\\Documents\\Arduino\\libraries"
             ],
             "defines": [
                 "ARDUINO",

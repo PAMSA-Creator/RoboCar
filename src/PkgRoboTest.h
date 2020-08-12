@@ -20,7 +20,7 @@ class RoboTest{
     CSen* p_itsCSen = NULL;
     CTst* p_itsCTst = NULL;
 
-    char* itsTestToRun = NULL;
+    const char* itsTestToRun = NULL;
 
     public:
     // Default constructor
