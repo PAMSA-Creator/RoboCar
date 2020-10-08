@@ -53,6 +53,7 @@ class ICom{
     virtual void init();
     virtual void println(const char* arg);
     virtual void BTControlLED();
+    virtual void CmdRxCheck();
 };
 
 /* Adapter class */
@@ -78,6 +79,7 @@ class ACom : public ICom{
     // Behaviour
     void println(const char* arg);
     void BTControlLED();
+    void CmdRxCheck();
 };
 
 /* Class Bluetooth */
@@ -103,6 +105,7 @@ class ACom : public ICom{
     // Behaviour
     void println(const char* arg);
     void BTControlLED();
+    void CmdRxCheck();
 };
 
 #endif

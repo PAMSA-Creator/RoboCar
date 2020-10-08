@@ -184,7 +184,7 @@ void RoboTest::run(){
     It will also indicate the time between each stream received.
     HINT: research how to read time from Arduino, use newtime and oldtime to calculate the duration between each input.
     This is to check the frequency at which information can be sent via the Communication interface.
-    For example how quickly can we press multiple commands before one or more gets droped.
+    For example how quickly can we press multiple commands before one or more gets dropped.
 
     The receive command will need to be triggered by an interrupt to avoid the whole system to hang waiting for an input.
     This can be done last after confirming the hardware works properly.

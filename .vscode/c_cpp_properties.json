@@ -50,7 +50,7 @@
                     "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
                     "C:\\Program Files (x86)\\Arduino\\libraries",
                     "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\SoftwareSerial\\src",
-                    "C:\\Users\\vvill\\OneDrive\\Documents\\Arduino\\libraries"
+                    "C:\\Users\\Afnan\\Documents\\Arduino\\libraries"
                 ],
                 "limitSymbolsToIncludedHeaders": true
             },
@@ -62,7 +62,7 @@
                 "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
                 "C:\\Program Files (x86)\\Arduino\\libraries",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\SoftwareSerial\\src",
-                "C:\\Users\\vvill\\OneDrive\\Documents\\Arduino\\libraries"
+                "C:\\Users\\Afnan\\Documents\\Arduino\\libraries"
             ],
             "defines": [
                 "ARDUINO",

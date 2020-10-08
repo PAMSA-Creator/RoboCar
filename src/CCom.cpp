@@ -105,6 +105,11 @@ void ACom::BTControlLED(){
    return p_itsBluetooth->BTControlLED();
 }
 
+void ACom::CmdRxCheck(){
+    //call the function from the Bluetooth class
+   return p_itsBluetooth->CmdRxCheck();
+}
+
 /* --------------------- Bluetooth ------------------------- */
 /*
 TBD
@@ -114,6 +119,7 @@ Bluetooth::Bluetooth(){
 #define _HC05
 #ifdef _HC05 
     p_HC05 = new SoftwareSerial(3, 2); // 3,2 are the Rx and Tx pins in arduino UNO respectively
+    //https://www.arduino.cc/en/Reference/SoftwareSerialConstructor
 #endif
 }
 
@@ -129,17 +135,18 @@ TBD
 */
 void Bluetooth::init_Bluetooth(){
     
-    if(!Serial){
+    if(!Serial){ // do nothing
     }
     #define _HC05
     #ifdef _HC05
     //I've included SoftwareSerial.h library in the CCom.h
-  // p_HC05 = new SoftwareSerial(3,2); // 3,2 are the Rx and Tx pins in arduino UNO respectively
+    p_HC05 = new SoftwareSerial(3,2); // 3,2 are the Rx and Tx pins in arduino UNO respectively
     if (p_HC05 !=NULL){
         p_HC05-> begin (9600);
     }
     #endif
     Serial.println("Bluetooth::init_Bluetooth()");
+    Serial.println ();
 }
 
 /*
@@ -183,3 +190,22 @@ void Bluetooth::BTControlLED(){
         Serial.println ("!!! NOT POSSIBLE !!!");
     }
 }
+
+void Bluetooth::CmdRxCheck(){
+    //Local variables
+        char Cmd = 'x';
+    #ifdef _HC05 
+        if (p_HC05->available()){
+        Cmd = p_HC05->read ();
+        Serial.println("Reading the serial BT");
+        delay(500);
+        Serial.print ("Your Command is:");
+        //Serial.println (Cmd);
+        Serial.write (Cmd);
+        Seial.println( );
+        }
+    #else 
+        Serial.println ("No Command was recieved!");
+    #endif
+
+    }

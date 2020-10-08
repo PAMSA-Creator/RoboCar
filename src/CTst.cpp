@@ -53,10 +53,10 @@ ITst* CTst::get_ItsITst(){
 */
 IMan* CTst::get_ItsIMan(){
     // Return the pointer that exists
-    if(NULL != p_itsATstMan)
-        return (IMan*) p_itsATstMan;
-    else if(NULL != p_itsIMan)
-        return (IMan*) p_itsIMan;
+    if(NULL != p_itsATstMan) //if its emulated
+        return (IMan*) p_itsATstMan; //return it to the adapter
+    else if(NULL != p_itsIMan) //if its not emulated
+        return (IMan*) p_itsIMan; // return it to the component
     else
         return NULL;
 }
@@ -438,7 +438,7 @@ void Tester::runMotTest(void){
         // Remember that the top-most bit is set to 1 for direction CID
         //char command = 0x80 | ((value << 4) & 0xF0);
         /* AH >> Here I made that so that the input values are still the same varying between 1 and 9 and I also changed their corresponding values in the CMot.cpp to be matching*/
-        unsigned char command = (value<<4) & 0xF0;
+        char command = (value<<4) & 0xF0;
 
         /* Change to the correct command required for the motion that we want to do */
         /* See CMOt for the correct command - translate from keyboard input to CID  
@@ -472,9 +472,9 @@ void Tester::runComTest(void){
     Serial.read();
     // Initial test should be simple, e.g. turn on an LED when any string has been received on the Bluetooth (Com) interface.
     // First, wait for an input on the Bluetooth module
-    p_itsCTst ->get_ItsICom()-> BTControlLED();
+    //p_itsCTst ->get_ItsICom()-> BTControlLED();
     // Then gradually increase the complexity by checking specific commands.
-    
+   p_itsCTst ->get_ItsICom()-> CmdRxCheck();
     // Record the time event and measure duration between messages.
 }
 

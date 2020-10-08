@@ -60,7 +60,7 @@ void setup(){
     Serial.begin(115200);
 
     // Wait for Serial to be ready (do nothing)
-    while (!Serial);
+    while (!Serial); //this line = while (!Serial.available()) { };
 
     // When ready, print something to inform us where we are
     Serial.println("RoboTst::setup()");
