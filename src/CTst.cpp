@@ -152,7 +152,7 @@ void CTst::init(){
     }
 
     if(NULL != p_itsATst){
-        p_itsATst->set_ItsTester(p_itsTester);        // Set relationship with Tester
+        p_itsATst->set_ItsTester(p_itsTester);      // Set relationship with Tester
         p_itsATst->init();                          // Initialise ATst
     } // !!! Need to catch exception !!!
 }
@@ -464,22 +464,46 @@ void Tester::runComTest(void){
     Serial.println("Tester::runComTest");
 
     // Initialise the CCom component
-    p_itsCTst->get_ItsICom()->init();
+    // We want to do this only once so we use a static bRun flag to check if it has been run
+    // It has not ben run so set the flag to flase
+    static bool bRun = false;
+
+    static unsigned long ulPreviousTime = 0;
+    unsigned long ulNewTime = 0;
+    unsigned long ulElapsedTime = 0;
+
+    // If it has not been run
+    if(!bRun){
+        // Execute the initialisation
+        p_itsCTst->get_ItsICom()->init();
+
+        // Now it has been run so set the flag to true
+        bRun = true;
+    }
 
     // For debug purposes wait for something to happen on the serial port.
-    // Remove this once the function is fully implemented
-    while(!Serial.available());
-    Serial.read();
+    // Remove these two lines once the function is fully implemented
+    // while(!Serial.available());
+    // Serial.read();
+
     // Initial test should be simple, e.g. turn on an LED when any string has been received on the Bluetooth (Com) interface.
     // First, wait for an input on the Bluetooth module
-    //p_itsCTst ->get_ItsICom()-> BTControlLED();
+    // p_itsCTst->get_ItsICom()->BTControlLED();
+
     // Then gradually increase the complexity by checking specific commands.
-   p_itsCTst ->get_ItsICom()-> CmdRxCheck();
+    p_itsCTst->get_ItsICom()->CmdRxCheck();
+
     // Record the time event and measure duration between messages.
+    ulNewTime = micros();
+    ulElapsedTime = ulNewTime - ulPreviousTime;
+    Serial.print("Time taken to go around the loop: ");
+    Serial.print(ulElapsedTime);
+    ulPreviousTime = micros();
 }
 
 void Tester::runManTest(void){
-    // TBD
+    // Read a character from CCom (the Bluetooth interface)
+    // If there is something pass it on to CMot
 }
 
 void Tester::runSenTest(void){

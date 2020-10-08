@@ -13,9 +13,9 @@
 */
 #include "PkgRoboTest.h"
 
-#define _CMAN_EMU   true
-#define _CCOM_EMU   false    // Set to false for ASSIGNMENT 2
-#define _CMOT_EMU   true   // Set to false for ASSIGNMENT 1
+#define _CMAN_EMU   false   // Set to false for ASSIGNMENT 3
+#define _CCOM_EMU   false   // Set to false for ASSIGNMENT 2 & 3
+#define _CMOT_EMU   false   // Set to false for ASSIGNMENT 1 & 3
 #define _CSEN_EMU   true
 
 RoboTest::RoboTest(){ //RoboTest() is the package constructor,(N.B.the constructor is always named after the class name)
@@ -160,7 +160,7 @@ void RoboTest::run(){
         Serial.println("RoboTest::run()");
         bRun = true;
     }
-    /*FIRST ASSIGNMENT:    Set the wheels in motion
+    /*FIRST ASSIGNMENT:    SET THE WHEELS IN MOTION
     Create a runATest() function in the Tester class (CTst) that will read an input from the keyboard and send the command to a Controller class (CMot).
 
     Authorised keyboard inputs are all numerical single digit characters (0,1,2,3,4,5,6,7,8,9).
@@ -175,7 +175,7 @@ void RoboTest::run(){
     // Call the runATest() function with argument "Mot" from ITst, the CTst interface
     //p_itsCTst->get_ItsITst()->runATest("Mot");
 
-    /*SECOND ASSIGNMENT:    Check the communication interface
+    /*SECOND ASSIGNMENT:    CHECK THE COMMUNICATION INTERFACE
     Call the runATest function that we used previously in assignment 1.
     First change the function to take a string parameter "Mot" or "Com" so on and so forth to run the correct test.
     will confirm the data received on the communication interface by displaying the value on a screen (e.g. terminal or LCD).
@@ -193,8 +193,19 @@ void RoboTest::run(){
     */
 
     // Call the test function with argument testToRun set to "Com" (remember to set it in the CTest constructor)
-    Serial.print("Test to be run: ");
-    Serial.println(itsTestToRun);
-    p_itsCTst->get_ItsITst()->runATest(itsTestToRun);
-    //p_itsCTst->get_ItsITst()->runATest("Com");
+    // Serial.print("Test to be run: ");
+    // Serial.println(itsTestToRun);
+    //  p_itsCTst->get_ItsITst()->runATest(itsTestToRun);
+    //  p_itsCTst->get_ItsITst()->runATest("Com");
+
+    /* THIRD ASSIGNMENT:    CONNECT CMAN, CCOM AND CMOT TO DRIVE THE MOTORS FROM THE BLUETOOTH interface
+    In this assignment we are now using the CCom and CMot components that have been tested previously to test the CMan component
+    The aim is to read a charcter from the CCom Bluetooth serial port and pass it to the CMot to action the MOTORS
+    HINTS:  IMan must provide a run() function
+                In the run() function CMan will read a character from CCom and pass it to CMot (watch out for any conversion needed)
+            CCom must provide a read() function - This will return a char - it will be used by CMan to read the character
+            CMot should only have to take the command and execute it
+    !!! Watch for the initialisation of the package, making sure all Components are initialised properly with the right pointers !!!
+    */
+    p_itsCTst->get_ItsITst()->runATest("Man");
 }
