@@ -193,7 +193,6 @@ void RoboTest::run(){
     */
 
     // Call the test function with argument testToRun set to "Com" (remember to set it in the CTest constructor)
-<<<<<<< Updated upstream
     // Serial.print("Test to be run: ");
     // Serial.println(itsTestToRun);
     //  p_itsCTst->get_ItsITst()->runATest(itsTestToRun);
@@ -209,10 +208,4 @@ void RoboTest::run(){
     !!! Watch for the initialisation of the package, making sure all Components are initialised properly with the right pointers !!!
     */
     p_itsCTst->get_ItsITst()->runATest("Man");
-=======
-    //Serial.print("Test to be run: ");
-   // Serial.println(itsTestToRun);
-    p_itsCTst->get_ItsITst()->runATest(itsTestToRun);
-    //p_itsCTst->get_ItsITst()->runATest("Com");
->>>>>>> Stashed changes
 }
