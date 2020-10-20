@@ -192,19 +192,20 @@ void Bluetooth::BTControlLED(){
 }
 
 void Bluetooth::CmdRxCheck(){
-    //Local variables
+    // Local variables
     char Cmd = 'x';
-#ifdef _HC05 
+#ifdef _HC05
+    // while (!p_HC05->available()); //waiting for input to BT
     if (p_HC05->available()){
         Cmd = p_HC05->read ();
-        Serial.println("Reading the serial BT");
-        delay(500);
-        Serial.print ("Your Command is:");
+        //Serial.println("Reading the serial BT");
+        //delay(500);
+        //Serial.print ("Your Command is:");
         //Serial.println (Cmd);
-        Serial.write (Cmd);
-        Seial.println( );
+        //Serial.write (Cmd);
+        //Serial.println( );
     }
-#else
-    Serial.println ("No Command was recieved!");
-#endif
+   #else 
+       Serial.println ("No Command was recieved!");
+   #endif
 }

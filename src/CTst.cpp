@@ -461,31 +461,25 @@ void Tester::runMotTest(void){
 }
 
 void Tester::runComTest(void){
-    Serial.println("Tester::runComTest");
-
-    // Initialise the CCom component
-    // We want to do this only once so we use a static bRun flag to check if it has been run
-    // It has not ben run so set the flag to flase
-    static bool bRun = false;
-
+    //Serial.println("Tester::runComTest");
+    // Local static variable for time measurement
     static unsigned long ulPreviousTime = 0;
+    // Local volatile variables for time measurement
     unsigned long ulNewTime = 0;
     unsigned long ulElapsedTime = 0;
 
-    // If it has not been run
-    if(!bRun){
-        // Execute the initialisation
+    // Initialise the CCom component
+    static bool bRun = false; //bRun = has been run
+    if (!bRun){ //If the result of this condition is true
+        ulPreviousTime = micros();
         p_itsCTst->get_ItsICom()->init();
-
-        // Now it has been run so set the flag to true
         bRun = true;
     }
-
+    
     // For debug purposes wait for something to happen on the serial port.
-    // Remove these two lines once the function is fully implemented
-    // while(!Serial.available());
-    // Serial.read();
-
+    // Remove this once the function is fully implemented
+    //while(!Serial.available());
+    //Serial.read();
     // Initial test should be simple, e.g. turn on an LED when any string has been received on the Bluetooth (Com) interface.
     // First, wait for an input on the Bluetooth module
     // p_itsCTst->get_ItsICom()->BTControlLED();
@@ -494,10 +488,15 @@ void Tester::runComTest(void){
     p_itsCTst->get_ItsICom()->CmdRxCheck();
 
     // Record the time event and measure duration between messages.
+    // To do this we need to capture the time once, store it in a static variable then calculate the differnce from the previous measurement
+
     ulNewTime = micros();
     ulElapsedTime = ulNewTime - ulPreviousTime;
-    Serial.print("Time taken to go around the loop: ");
-    Serial.print(ulElapsedTime);
+    //if (ulElapsedTime >50){
+        Serial.print("Time taken to complete the loop: ");
+        Serial.println(ulElapsedTime);
+    //}
+    // ulPreviousTime = ulNewTime;
     ulPreviousTime = micros();
 }
 
