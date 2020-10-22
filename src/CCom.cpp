@@ -209,3 +209,12 @@ void Bluetooth::CmdRxCheck(){
        Serial.println ("No Command was recieved!");
    #endif
 }
+
+char Bluetooth::readBTCmd(){
+//This function is to read the char sent to the Arduino through the BT then send it to the CMan 
+char BTCmd = 'a';
+BTCmd = p_itsBluetooth->CmdRxCheck();
+Serial.print("The Recieved BT command is:");
+Serial.println(BTCmd);
+return BTCmd;
+}

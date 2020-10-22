@@ -54,6 +54,7 @@ class ICom{
     virtual void println(const char* arg);
     virtual void BTControlLED();
     virtual void CmdRxCheck();
+    virtual char readBTCmd();
 };
 
 /* Adapter class */
@@ -80,6 +81,7 @@ class ACom : public ICom{
     void println(const char* arg);
     void BTControlLED();
     void CmdRxCheck();
+    char readBTCmd();
 };
 
 /* Class Bluetooth */
@@ -106,6 +108,7 @@ class ACom : public ICom{
     void println(const char* arg);
     void BTControlLED();
     void CmdRxCheck();
+    char readBTCmd();
 };
 
 #endif

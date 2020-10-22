@@ -501,8 +501,11 @@ void Tester::runComTest(void){
 }
 
 void Tester::runManTest(void){
+    p_itsCTst->get_ItsIMan()->init();
     // Read a character from CCom (the Bluetooth interface)
+    p_itsCTst->get_ItsICom()->readBTCmd();
     // If there is something pass it on to CMot
+    //p_itsCTst->get_ItsIMan()->run();
 }
 
 void Tester::runSenTest(void){
