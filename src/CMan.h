@@ -43,6 +43,9 @@ class CMan{
     void set_ItsICom(ICom* arg);
     void set_ItsIMot(IMot* arg);
     void set_ItsISen(ISen* arg);
+    ICom* get_ItsICom();
+    IMot* get_ItsIMot();
+    ISen* get_ItsISen();
 
     // Initialisation
     void init();
@@ -54,6 +57,7 @@ class CMan{
 class IMan{
     public:
     virtual void init();
+    virtual void run();
 };
 
 /* Adapter class */
@@ -77,10 +81,13 @@ class AMan:public IMan{
     void init();
 
     // Behaviour
+    void run();
 };
 
 /* Brain class */
 class Brain{
+    private:
+    CMan* p_itsCMan = NULL;
     private:
     void init_Brain();
 
@@ -90,11 +97,13 @@ class Brain{
     ~Brain();
 
     // Getters and Setters
-
+    Brain* getItsBrain();
+    void setItsCMan(CMan* arg);
     // Initialisation
     void init();
 
     // Behaviour
+    void run();
 };
 
 #endif

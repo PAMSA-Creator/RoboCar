@@ -52,6 +52,10 @@ Pass a valid ISen point to local variable p_itsISen or nullify
 void CMan::set_ItsISen(ISen* arg){
     p_itsISen = (NULL != arg) ? arg : NULL;
 }
+/*Getters*/
+ICom* CMan::get_ItsICom() {return p_itsICom;}
+IMot* CMan::get_ItsIMot(){return p_itsIMot;}
+ISen* CMan::get_ItsISen(){return p_itsISen;}
 
 /*
 Initilisation
@@ -60,8 +64,10 @@ Check and set all relationships (pointers)
 void CMan::init(){
     Serial.println("CMan::init()");
     if(NULL != p_itsBrain){
+        p_itsBrain->setItsCMan(this);
         p_itsBrain->init();                         // Initialise Brain
     } // !!! Need to catch exception !!!
+    
 
     if(NULL != p_itsAMan){
         p_itsAMan->set_ItsBrain(p_itsBrain);        // Set relationship with Brain
@@ -69,7 +75,7 @@ void CMan::init(){
     } // !!! Need to catch exception !!!
 }
 
-/* --------------------- ACom ------------------------- */
+/* --------------------- AMan ------------------------- */
 /*
 Default constructor
 */
@@ -105,6 +111,12 @@ void AMan::init(){
     this->init_AMan();
 }
 
+void AMan::run(){
+    p_itsBrain->run();
+}
+
+
+
 /* -------------------- Brain -------------------------- */
 /*
 Default constructor
@@ -119,7 +131,17 @@ Default destructor
 Brain::~Brain(){
     // TBD
 }
-
+/*
+Getters and Setters
+*/
+Brain* Brain::getItsBrain() 
+{
+return this;
+}
+void Brain::setItsCMan(CMan* arg)
+{
+p_itsCMan = arg; //set the pointer to CMan
+}
 /*
 Initilisation
 Initialise Brain
@@ -130,4 +152,12 @@ void Brain::init_Brain(){
 
 void Brain::init(){
     this->init_Brain();
+}
+
+void Brain::run(){
+    //the first thing to do is to check the BT for any commands
+    char Cmd = p_itsCMan->get_ItsICom()->readCmd();
+
+    //If a Cmd has been received then pass it to the correct component (CMot for assignment 3)
+
 }

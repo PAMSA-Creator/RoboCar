@@ -110,6 +110,10 @@ void ACom::CmdRxCheck(){
    return p_itsBluetooth->CmdRxCheck();
 }
 
+char ACom::readCmd(){
+    return p_itsBluetooth->readCmd();
+}
+
 /* --------------------- Bluetooth ------------------------- */
 /*
 TBD
@@ -210,11 +214,16 @@ void Bluetooth::CmdRxCheck(){
    #endif
 }
 
-char Bluetooth::readBTCmd(){
+char Bluetooth::readCmd(){
 //This function is to read the char sent to the Arduino through the BT then send it to the CMan 
-char BTCmd = 'a';
-BTCmd = p_itsBluetooth->CmdRxCheck();
+char Cmd = 'a';
+#ifdef _HC05
+    while (!p_HC05->available()); //waiting for input to BT
+    if (p_HC05->available()){
+        Cmd = p_HC05->read ();
+    }
+#endif
 Serial.print("The Recieved BT command is:");
-Serial.println(BTCmd);
-return BTCmd;
+Serial.println(Cmd);
+return Cmd;
 }
