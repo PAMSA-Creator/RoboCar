@@ -218,6 +218,7 @@ char Bluetooth::readCmd(){
 //This function is to read the char sent to the Arduino through the BT then send it to the CMan 
 char Cmd = 'a';
 #ifdef _HC05
+Serial.println ("waiting for BT Command");
     while (!p_HC05->available()); //waiting for input to BT
     if (p_HC05->available()){
         Cmd = p_HC05->read ();

@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:uno",
     "sketch": "src/RoboCar.ino",
-    "programmer": "AVRISP mkII",
+    "programmer": "AVR ISP",
     "port": "COM4"
 }

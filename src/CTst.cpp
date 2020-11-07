@@ -429,7 +429,7 @@ void Tester::runMotTest(void){
     if((input >= '1') && (input <= '9')){
         // First we need to convert from the ASCII code to the correct command
         // 1. Get the decimal value of the character
-        char value = input - '0';   /* Remember this trick */
+        char value = input - '0';   /* Remember this trick to convert ASCII to DEC*/
         Serial.println("Converted to Decimal: ");
         Serial.print(value,DEC);
         Serial.println();
@@ -505,7 +505,7 @@ void Tester::runManTest(void){
     // Read a character from CCom (the Bluetooth interface)
     //p_itsCTst->get_ItsICom()->readCmd();
     // If there is something pass it on to CMot
-    p_itsCTst->get_ItsIMan()->run();
+   p_itsCTst->get_ItsIMan()->run();
 }
 
 void Tester::runSenTest(void){

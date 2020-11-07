@@ -156,8 +156,42 @@ void Brain::init(){
 
 void Brain::run(){
     //the first thing to do is to check the BT for any commands
-    char Cmd = p_itsCMan->get_ItsICom()->readCmd();
+    unsigned char input = p_itsCMan->get_ItsICom()->readCmd();
+
+    if((input >= '1') && (input <= '9')){
+        // First we need to convert from the ASCII code to the correct command
+        // 1. Get the decimal value of the character
+        unsigned char value = input - '0';   /* Remember this trick to convert ASCII to DEC*/
+    #if defined(_DEBUG)
+        Serial.println("Converted to Decimal: ");
+        Serial.print(value,DEC);
+        Serial.println();
+    #endif     //end _DEBUG    
+
+        // 2. Set the correct direction
+        // Remember that the top-most bit is set to 1 for direction CID
+        //char command = 0x80 | ((value << 4) & 0xF0);
+        /* AH >> Here I made that so that the input values are still the same varying between 1 and 9 and I also changed their corresponding values in the CMot.cpp to be matching*/
+        unsigned char command = (value<<4) & 0xF0;
+
+        /* Change to the correct command required for the motion that we want to do */
+        /* See CMOt for the correct command - translate from keyboard input to CID  
+        for ex. 2 on the keyboard is opposed to 9 in the system*/
+
+        // 3. Set the correct speed
+        command |= 0x08;
+        
+    #if defined(_DEBUG)
+        // Get the interface to CMot from p_itsCTest and call the motionCommand() function passing 'command' as argument
+        Serial.println("Sending motionCommand: ");
+        Serial.print(command, BIN);
+        Serial.print(", ");
+        Serial.print(command, DEC);
+        Serial.println();
+    #endif  //_DEBUG
 
     //If a Cmd has been received then pass it to the correct component (CMot for assignment 3)
-
+    
+        p_itsCMan->get_ItsIMot()->motionCommand(command);
+    }
 }

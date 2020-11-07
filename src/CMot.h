@@ -49,7 +49,7 @@ class CMot{
 class IMot{
     public:
     virtual void init();
-    virtual int motionCommand(char arg);
+    virtual int motionCommand(unsigned char arg);
 };
 
 class AMot : public IMot{
@@ -71,7 +71,7 @@ class AMot : public IMot{
     void init();
 
     // Behaviour
-    int motionCommand(char arg);
+    int motionCommand(unsigned char arg);
 };
 
 class Controller{
@@ -97,7 +97,7 @@ class Controller{
     void set_ItsServo(Servo* arg);
 
     // Actions
-    int motionCommand(char arg);
+    int motionCommand(unsigned char arg);
 };
 
 class DCMotor{

@@ -79,7 +79,7 @@ void AMot::init(){
     this->init_AMot() ;
 }
 
-int AMot::motionCommand(char arg){
+int AMot::motionCommand(unsigned char arg){
     // Call the function from the Controller class
     return p_itsController->motionCommand(arg);
 }
@@ -114,14 +114,17 @@ void Controller::set_ItsServo(Servo* arg){
     p_itsServo = arg;
 }
 
-int Controller::motionCommand(char arg){
+int Controller::motionCommand(unsigned char arg){
     // First is to breakdown the arg (message) into CID and speed
     // The lowest significant 4 bits are the speed information
     // The highest significant 4 bits are the command identifier itself
 
     // calculate from only 16 values available (from 0 to 15) when speed is 15 then argSpeed = 255 (increment is 17)
-    char speed = (arg & 0x0F) * 17;
-    char CID = arg >> 4;
+    unsigned char speed = (arg & 0x0F) * 17;
+    unsigned char CID = (arg >> 4);
+    Serial.println(CID,BIN);
+  // CID = CID & 0x0F;
+    Serial.println(CID,BIN);
 
     // Run the command depending on CID
     switch (CID)
@@ -193,7 +196,7 @@ void DCMotor::init_DCMotor(){
     pinMode (In1,OUTPUT);
     // Initialise In2 pin as digital output
     pinMode (In2,OUTPUT);
-    //  Serial.println("DCMotor::init_DCMotor()");
+    Serial.println("DCMotor::init_DCMotor()");
     //  Serial.print("Enable pin is:");
     //  Serial.println(EN);
     //  Serial.print("In1 pin is:");
