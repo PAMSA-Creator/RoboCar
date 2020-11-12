@@ -1,9 +1,13 @@
 /*
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!! First define what code to build !!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! First let's choose the build option !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
 
+/*
+*   The release build does not contain any debug code
+*   In Release build optimization is turned on and debug symbols are not emitted
+*/
 // Define _RELEASE_BUILD to build the release version
 //#define _RELEASE_BUILD
 
