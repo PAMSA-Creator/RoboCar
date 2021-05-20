@@ -1,6 +1,6 @@
 {
     "env": {
-        "arduino.path": "${HOME}/Applications/ArduinoIDE/",
+        "arduino.path": "${HOME}/Applications/arduino-1.8.15",
         "arduino.avr.include.path": "${env:arduino.path}/hardware/arduino/avr",
         "arduino.tools.include.path": "${env:arduino.path}/hardware/tools/avr",
         "arduino.avr.compiler.path": "${env:arduino.path}/hardware/tools/avr/bin/avr-gcc",
@@ -23,13 +23,12 @@
                 "${workspaceFolder}/**",
                 "C:\\Users\\vvill\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.2\\**",
                 "C:\\Users\\vvill\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\**",
-                "/home/vvillatte/.arduino15/packages/arduino/hardware/avr/1.8.3/**",
-                "/home/vvillatte/.arduino15/packages/arduino/tools/**"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "USBCON"
             ],
             "windowsSdkVersion": "10.0.17763.0",
             "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.21.27702/bin/Hostx64/x64/cl.exe",
@@ -39,7 +38,6 @@
             "forcedInclude": [
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h",
                 "C:\\Users\\vvill\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.2\\cores\\arduino\\Arduino.h",
-                "/home/vvillatte/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/Arduino.h"
             ]
         },
         {
@@ -87,12 +85,14 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src",
-                "${env:arduino.avr.include.path}/cores/arduino",
+                "${env:arduino.avr.include.path}/tools/**",
+                "${env:arduino.avr.include.path}/hardware/arduino/**",
+                "${env:arduino.avr.include.path}/hardware/arduino/avr/cores/**",
                 "${env:arduino.avr.include.path}/variants/standard",
                 "${env:arduino.tools.include.path}/avr/include/avr"
             ],
             "forcedInclude": [
-                "/home/vvillatte/Applications/ArduinoIDE/hardware/arduino/avr/cores/arduino/Arduino.h"
+                "${env:arduino.avr.include.path}/hardware/arduino/avr/cores/arduino/Arduino.h"
             ],
             "defines": [
                 "USBCON"
@@ -109,16 +109,6 @@
                 ],
                 "limitSymbolsToIncludedHeaders": true
             }
-        },
-        {
-            "name": "Linux",
-            "includePath": [
-                "/home/vvillatte/Applications/ArduinoIDE/tools/**",
-                "/home/vvillatte/Applications/ArduinoIDE/hardware/arduino/avr/**"
-            ],
-            "forcedInclude": [
-                "/home/vvillatte/Applications/ArduinoIDE/hardware/arduino/avr/cores/arduino/Arduino.h"
-            ]
         }
     ],
     "version": 4
