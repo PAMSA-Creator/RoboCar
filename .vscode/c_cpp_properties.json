@@ -22,7 +22,7 @@
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
                 "${workspaceFolder}/**",
                 "C:\\Users\\vvill\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.2\\**",
-                "C:\\Users\\vvill\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\**",
+                "C:\\Users\\vvill\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\**"
             ],
             "defines": [
                 "_DEBUG",
@@ -37,7 +37,7 @@
             "intelliSenseMode": "msvc-x64",
             "forcedInclude": [
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h",
-                "C:\\Users\\vvill\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.2\\cores\\arduino\\Arduino.h",
+                "C:\\Users\\vvill\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.2\\cores\\arduino\\Arduino.h"
             ]
         },
         {
